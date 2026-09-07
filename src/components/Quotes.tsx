@@ -17,11 +17,29 @@ const QUOTES = [
     role: 'Operations manager',
     avatar: '/images/avatar-3.jpg',
   },
+  {
+    quote: 'Compliance training used to take a consultant. Now it takes an afternoon.',
+    role: 'L&D manager',
+    avatar: '/images/avatar-4.jpg',
+  },
+  {
+    quote: 'New hires stopped asking the same three questions once the course covered it.',
+    role: 'HR lead',
+    avatar: '/images/avatar-5.jpg',
+  },
+  {
+    quote: 'Every score updates the dashboard in real time. No more guessing who needs help.',
+    role: 'Training coordinator',
+    avatar: '/images/avatar-6.jpg',
+  },
 ]
+
+const ROW_1 = QUOTES.slice(0, 3)
+const ROW_2 = QUOTES.slice(3, 6)
 
 function Card({ q }: { q: (typeof QUOTES)[number] }) {
   return (
-    <div className="card w-[22rem] shrink-0 rounded-2xl bg-white p-6">
+    <div className="card w-[21rem] shrink-0 rounded-2xl bg-white p-6">
       <p className="text-[15px] leading-relaxed text-ink">"{q.quote}"</p>
       <div className="mt-5 flex items-center gap-3">
         <img src={q.avatar} alt="" className="size-9 rounded-full object-cover" />
@@ -33,9 +51,40 @@ function Card({ q }: { q: (typeof QUOTES)[number] }) {
   )
 }
 
+function Row({
+  quotes,
+  reverse,
+  duration,
+  offset,
+  paused,
+}: {
+  quotes: typeof QUOTES
+  reverse?: boolean
+  duration: string
+  offset?: boolean
+  paused: boolean
+}) {
+  const items = [...quotes, ...quotes]
+  return (
+    <div className="no-scrollbar overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+      <div
+        className={`flex w-max gap-5 animate-marquee ${offset ? '-translate-x-24' : ''}`}
+        style={{
+          animationDuration: duration,
+          animationDirection: reverse ? 'reverse' : 'normal',
+          animationPlayState: paused ? 'paused' : 'running',
+        }}
+      >
+        {items.map((q, i) => (
+          <Card key={i} q={q} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function Quotes() {
   const [paused, setPaused] = useState(false)
-  const items = [...QUOTES, ...QUOTES]
 
   return (
     <section className="py-24">
@@ -47,20 +96,14 @@ export function Quotes() {
         </Reveal>
       </div>
 
-      <Reveal delay={0.1} className="mt-12">
+      <Reveal delay={0.1}>
         <div
+          className="mt-12 space-y-5"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          className="no-scrollbar overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]"
         >
-          <div
-            className="flex w-max gap-5 animate-marquee"
-            style={{ animationDuration: '38s', animationPlayState: paused ? 'paused' : 'running' }}
-          >
-            {items.map((q, i) => (
-              <Card key={i} q={q} />
-            ))}
-          </div>
+          <Row quotes={ROW_1} duration="34s" paused={paused} />
+          <Row quotes={ROW_2} duration="40s" reverse offset paused={paused} />
         </div>
       </Reveal>
     </section>

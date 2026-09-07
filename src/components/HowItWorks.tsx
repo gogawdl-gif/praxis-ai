@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   BarChart3,
   BookOpen,
@@ -7,7 +8,7 @@ import {
   RefreshCcw,
   ScreenShare,
 } from 'lucide-react'
-import type { ComponentType } from 'react'
+import { type ComponentType, useEffect, useState } from 'react'
 import { DashboardMockup } from './DashboardMockup'
 import { IconDropFile, IconMic } from './icons'
 import { AgentChatMockup } from './mockups/AgentChatMockup'
@@ -45,26 +46,74 @@ const RESULTS: Item[] = [
   { icon: RefreshCcw, title: 'Training that updates itself', body: 'Tell it what changed in a sentence. Every course built from it updates instantly.', Visual: UpdateMockup },
 ]
 
-function Row({ item, delay }: { item: Item; delay: number }) {
+const CYCLE_MS = 4200
+
+function CycleGroup({ items }: { items: Item[] }) {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+
+  useEffect(() => {
+    if (paused || items.length <= 1) return
+    const id = setInterval(() => setActive((a) => (a + 1) % items.length), CYCLE_MS)
+    return () => clearInterval(id)
+  }, [paused, items.length])
+
+  const item = items[active]
+
   return (
-    <Reveal delay={delay}>
-      <div className="grid gap-6 border-t py-8 first:border-t-0 first:pt-0 md:grid-cols-[minmax(0,280px)_1fr] md:items-center md:gap-10" style={{ borderColor: '#e6e8f2' }}>
-        <div className="flex items-start gap-3">
-          <span className="grid size-9 shrink-0 place-items-center rounded-lg" style={{ backgroundColor: '#eef1fd', color: '#3d4bf5' }}>
-            <item.icon size={16} />
-          </span>
-          <div>
-            <h4 className="font-display text-base font-medium">{item.title}</h4>
-            <p className="mt-1 text-sm leading-relaxed" style={{ color: '#4b4b5c' }}>
-              {item.body}
-            </p>
-          </div>
-        </div>
+    <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+      <div className="grid gap-8 md:grid-cols-[minmax(0,280px)_1fr] md:items-center md:gap-10">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={item.title}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-start gap-3"
+          >
+            <span className="grid size-9 shrink-0 place-items-center rounded-lg" style={{ backgroundColor: '#eef1fd', color: '#3d4bf5' }}>
+              <item.icon size={16} />
+            </span>
+            <div>
+              <h4 className="font-display text-base font-medium">{item.title}</h4>
+              <p className="mt-1 text-sm leading-relaxed" style={{ color: '#4b4b5c' }}>
+                {item.body}
+              </p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
         <div className="h-[260px]">
-          <item.Visual />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="h-full"
+            >
+              <item.Visual />
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
-    </Reveal>
+
+      {items.length > 1 && (
+        <div className="mt-6 flex gap-1.5 md:ml-[19.5rem]">
+          {items.map((it, i) => (
+            <button
+              key={it.title}
+              onClick={() => setActive(i)}
+              aria-label={`Show ${it.title}`}
+              className="h-1.5 rounded-full transition-all"
+              style={{ width: active === i ? 20 : 6, backgroundColor: active === i ? '#3d4bf5' : '#e6e8f2' }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -103,11 +152,9 @@ function MacroSection({
         </p>
       </Reveal>
 
-      <div className="mt-8 md:ml-16">
-        {items.map((item, i) => (
-          <Row key={item.title} item={item} delay={i * 0.06} />
-        ))}
-      </div>
+      <Reveal delay={0.1} className="mt-8 md:ml-16">
+        <CycleGroup items={items} />
+      </Reveal>
     </div>
   )
 }
@@ -132,7 +179,7 @@ export function HowItWorks() {
 
       <div className="relative mx-auto mt-16 max-w-5xl px-6">
         <div className="absolute left-6 top-6 bottom-6 hidden w-px md:block" style={{ backgroundColor: '#e6e8f2' }} />
-        <div className="space-y-20">
+        <div className="space-y-16">
           <MacroSection
             n="01"
             label="Input"
