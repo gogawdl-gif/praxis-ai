@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AgentChatMockup } from './mockups/AgentChatMockup'
 import { DropzoneMockup } from './mockups/DropzoneMockup'
 import { ScreenRecordMockup } from './mockups/ScreenRecordMockup'
@@ -12,9 +12,12 @@ const SLIDES = [
   { title: 'Answer a few questions', body: 'The training agent asks what a screen recording alone would miss.', Visual: AgentChatMockup },
 ]
 
+const AUTOPLAY_MS = 4200
+
 export function CaptureShowcase() {
   const trackRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
   const dragging = useRef(false)
   const startX = useRef(0)
   const startScroll = useRef(0)
@@ -28,6 +31,7 @@ export function CaptureShowcase() {
 
   function onPointerDown(e: React.PointerEvent) {
     dragging.current = true
+    setPaused(true)
     startX.current = e.clientX
     startScroll.current = trackRef.current?.scrollLeft ?? 0
     ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
@@ -45,6 +49,24 @@ export function CaptureShowcase() {
     if (!el) return
     el.scrollTo({ left: (el.scrollWidth / SLIDES.length) * i, behavior: 'smooth' })
   }
+
+  // Auto-advance, paused while the carousel is hovered or being dragged.
+  // goTo() scrolls the track; the onScroll handler above is what updates
+  // `active`, so this effect only needs a ref to avoid a stale closure
+  // (calling goTo from inside a setState updater would double-fire under
+  // StrictMode and cancel the smooth-scroll animation).
+  const activeRef = useRef(0)
+  useEffect(() => {
+    activeRef.current = active
+  }, [active])
+
+  useEffect(() => {
+    if (paused) return
+    const id = setInterval(() => {
+      goTo((activeRef.current + 1) % SLIDES.length)
+    }, AUTOPLAY_MS)
+    return () => clearInterval(id)
+  }, [paused])
 
   return (
     <section className="py-24">
@@ -67,6 +89,8 @@ export function CaptureShowcase() {
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerLeave={onPointerUp}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
           className="no-scrollbar mt-12 flex cursor-grab snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-2 active:cursor-grabbing md:px-[max(1.5rem,calc((100vw-72rem)/2))]"
         >
           {SLIDES.map((slide) => (

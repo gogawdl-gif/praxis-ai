@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion'
 import { DashboardMockup } from './DashboardMockup'
 import { SimulationMockup } from './SimulationMockup'
 import { TiltCard } from './TiltCard'
@@ -20,19 +20,16 @@ function ShowItOncePhoto() {
 
 const STEPS = [
   {
-    n: '01',
     title: 'Show it once',
     body: "Talk through the process the way you'd explain it to a new hire, on screen or on camera. Mobbilise asks the follow-up questions a recording alone would miss.",
     Visual: ShowItOncePhoto,
   },
   {
-    n: '02',
     title: 'Employees practice before it counts',
     body: "They run the actual scenario, including the difficult customer. You find out who's ready before your customers do.",
     Visual: SimulationMockup,
   },
   {
-    n: '03',
     title: 'You always know who can handle it',
     body: "Every attempt is scored on its own. Open the dashboard and see exactly who needs another pass, without asking around.",
     Visual: DashboardMockup,
@@ -43,6 +40,7 @@ export function StickySteps() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] })
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
     setActive(Math.min(STEPS.length - 1, Math.floor(v * STEPS.length)))
@@ -51,38 +49,50 @@ export function StickySteps() {
   return (
     <section id="how-it-works" ref={containerRef} className="relative py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-16 md:grid-cols-2">
-          <div>
-            {STEPS.map((step, i) => (
-              <div key={step.n} className="flex min-h-[65vh] flex-col justify-center md:min-h-[80vh]">
-                <span
-                  className="font-display text-sm transition-colors"
-                  style={{ color: active === i ? '#3d4bf5' : '#c3c6da' }}
-                >
-                  {step.n}
-                </span>
-                <h3
-                  className="mt-3 font-display text-2xl font-medium tracking-tight transition-opacity md:text-[2.2rem]"
-                  style={{ opacity: active === i ? 1 : 0.35 }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  className="mt-4 max-w-sm text-[15px] leading-relaxed transition-opacity"
-                  style={{ opacity: active === i ? 1 : 0.35, color: '#4b4b5c' }}
-                >
-                  {step.body}
-                </p>
+        <div className="grid gap-12 md:grid-cols-[1fr_1fr] md:gap-16">
+          <div className="relative">
+            <div className="absolute left-4 top-0 bottom-0 w-px" style={{ backgroundColor: '#e6e8f2' }} />
+            <motion.div
+              className="absolute left-4 top-0 w-px"
+              style={{ height: lineHeight, backgroundColor: '#3d4bf5' }}
+            />
 
-                <div className="mt-8 h-72 md:hidden">
-                  <step.Visual />
+            {STEPS.map((step, i) => (
+              <div key={step.title} className="flex min-h-[68vh] items-start gap-6 md:min-h-[75vh] md:items-center">
+                <div
+                  className="relative z-10 grid size-8 shrink-0 place-items-center rounded-full border-2 bg-white font-display text-xs font-medium transition-colors duration-300"
+                  style={{
+                    borderColor: active === i ? '#3d4bf5' : '#e6e8f2',
+                    color: active === i ? '#3d4bf5' : '#c3c6da',
+                  }}
+                >
+                  {i + 1}
+                </div>
+
+                <div className="flex-1 pt-0.5">
+                  <h3
+                    className="font-display text-2xl font-medium tracking-tight transition-opacity duration-300 md:text-[2.1rem]"
+                    style={{ opacity: active === i ? 1 : 0.35 }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p
+                    className="mt-4 max-w-sm text-[15px] leading-relaxed transition-opacity duration-300"
+                    style={{ opacity: active === i ? 1 : 0.35, color: '#4b4b5c' }}
+                  >
+                    {step.body}
+                  </p>
+
+                  <div className="mt-8 h-72 md:hidden">
+                    <step.Visual />
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
           <div className="hidden md:block">
-            <div className="sticky top-28 h-[420px]">
+            <div className="sticky top-1/2 h-[420px] -translate-y-1/2">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}

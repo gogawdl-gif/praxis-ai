@@ -5,31 +5,36 @@ const TILES = [
     src: '/images/gallery-sales.jpg',
     label: 'Sales & customer success',
     note: 'Pitch decks & renewal calls',
-    className: 'col-span-2 row-span-2',
+    // mobile: cols 1-2, row 1  |  desktop: cols 1-2, rows 1-2
+    className: 'col-start-1 col-end-3 row-start-1 row-end-2 md:col-start-1 md:col-end-3 md:row-start-1 md:row-end-3',
   },
   {
     src: '/images/gallery-it.jpg',
     label: 'Software & IT',
     note: 'Deploys & access requests',
-    className: 'col-span-1 row-span-1',
+    // mobile: col 1, row 2  |  desktop: col 3, row 1
+    className: 'col-start-1 col-end-2 row-start-2 row-end-3 md:col-start-3 md:col-end-4 md:row-start-1 md:row-end-2',
   },
   {
     src: '/images/gallery-support.jpg',
     label: 'Customer support',
     note: 'Tickets & escalations',
-    className: 'col-span-1 row-span-2',
+    // mobile: col 2, row 2  |  desktop: col 4, rows 1-2
+    className: 'col-start-2 col-end-3 row-start-2 row-end-3 md:col-start-4 md:col-end-5 md:row-start-1 md:row-end-2',
   },
   {
     src: '/images/gallery-finance.jpg',
     label: 'Finance & ops',
     note: 'Reporting & approvals',
-    className: 'col-span-1 row-span-1',
+    // mobile: col 1, row 3  |  desktop: col 3, row 2
+    className: 'col-start-1 col-end-2 row-start-3 row-end-4 md:col-start-3 md:col-end-4 md:row-start-2 md:row-end-3',
   },
   {
     src: '/images/gallery-hr.jpg',
     label: 'HR & people',
     note: 'Onboarding & policy',
-    className: 'col-span-2 row-span-1',
+    // mobile: col 2, row 3  |  desktop: col 4, row 2
+    className: 'col-start-2 col-end-3 row-start-3 row-end-4 md:col-start-4 md:col-end-5 md:row-start-2 md:row-end-3',
   },
 ]
 
