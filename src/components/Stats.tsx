@@ -5,7 +5,7 @@ const STATS = [
   { node: <CountUp value={3} suffix="x" />, label: 'faster than building slides by hand' },
   { node: 'Zero', label: 'instructional designers needed' },
   { node: <CountUp value={1} />, label: 'sentence to update a lesson' },
-  { node: '24/7', label: 'available, every language' },
+  { node: '24/7', label: 'available, in 50+ languages' },
 ]
 
 export function Stats() {

@@ -1,7 +1,7 @@
 import { Reveal } from './Reveal'
 
 const ITEMS = [
-  { title: 'Single sign-on (SSO)', body: 'Your existing identity provider.' },
+  { title: 'Single sign-on (SSO)', body: 'Your existing identity provider, on the Enterprise plan.' },
   { title: 'Role-based permissions', body: 'Control who can create or edit.' },
   { title: 'Your data stays yours', body: 'Never shared, never used to train other models.' },
   { title: '50+ languages', body: 'Every office, automatically translated.' },

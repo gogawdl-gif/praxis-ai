@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import { MockupWindow } from './MockupWindow'
 
-const LESSONS = ['Opening store procedure', 'Handling a return', 'Cash handling policy']
+const LESSONS = ['Billing dispute process', 'Refund policy walkthrough', 'New CRM workflow']
 
 export function UpdateMockup() {
   return (
