@@ -6,9 +6,9 @@ import { VoiceMockup } from './mockups/VoiceMockup'
 import { Reveal } from './Reveal'
 
 const SLIDES = [
-  { title: 'Record your screen', body: 'Click record, walk through the workflow. Grasp watches every click.', Visual: ScreenRecordMockup },
-  { title: 'Just talk', body: "No slides needed. Explain the process out loud, Grasp writes it down.", Visual: VoiceMockup },
-  { title: 'Drag in what you have', body: 'Docs, decks, old training videos. Point Grasp at your existing library.', Visual: DropzoneMockup },
+  { title: 'Record your screen', body: 'Click record, walk through the workflow. Learnik watches every click.', Visual: ScreenRecordMockup },
+  { title: 'Just talk', body: "No slides needed. Explain the process out loud, Learnik writes it down.", Visual: VoiceMockup },
+  { title: 'Drag in what you have', body: 'Docs, decks, old training videos. Point Learnik at your existing library.', Visual: DropzoneMockup },
   { title: 'Answer a few questions', body: 'The training agent asks what a screen recording alone would miss.', Visual: AgentChatMockup },
 ]
 
@@ -76,7 +76,7 @@ export function CaptureShowcase() {
             However you'd rather teach it
           </h2>
           <p className="mt-3 text-ink-soft" style={{ color: '#4b4b5c' }}>
-            Pick whatever's fastest for you. Grasp turns any of it into the same finished course.
+            Pick whatever's fastest for you. Learnik turns any of it into the same finished course.
           </p>
         </Reveal>
       </div>
