@@ -46,7 +46,12 @@ export function Pricing() {
             style={{ borderColor: '#e6e8f2' }}
           >
             <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-white">
-              <div className="border-b p-6" style={{ borderColor: '#e6e8f2' }} />
+              <div className="border-b p-6" style={{ borderColor: '#e6e8f2' }}>
+                <div className="font-display text-lg font-medium tracking-tight text-ink">Compare plans</div>
+                <p className="mt-1.5 text-sm" style={{ color: '#8888a0' }}>
+                  Everything included, side by side.
+                </p>
+              </div>
               {PLANS.map((plan) => (
                 <div
                   key={plan.name}

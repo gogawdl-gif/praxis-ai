@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import { Reveal } from './Reveal'
+import { SimulationMockup } from './SimulationMockup'
+import { TiltCard } from './TiltCard'
 
 const HEADLINE = 'Turn what your best people know into training everyone can pass.'
 
@@ -66,6 +69,17 @@ export function Hero() {
           7-day free trial. No credit card, no setup call.
         </p>
       </div>
+
+      <Reveal delay={0.3} className="relative mx-auto mt-16 w-full max-w-sm px-6 md:rotate-1">
+        <span
+          className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-3.5 py-1.5 text-xs font-medium text-ink shadow-md"
+        >
+          What employees actually see
+        </span>
+        <TiltCard max={5} className="h-[300px]">
+          <SimulationMockup />
+        </TiltCard>
+      </Reveal>
     </section>
   )
 }

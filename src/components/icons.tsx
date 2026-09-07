@@ -37,3 +37,23 @@ export function IconDropFile(props: IconProps) {
     </svg>
   )
 }
+
+// lucide-react dropped brand/logo glyphs; this one's drawn by hand to
+// match the same stroke weight as the rest of this set.
+export function IconLinkedIn({ size, ...rest }: IconProps) {
+  return (
+    <svg width={size ?? 24} height={size ?? 24} viewBox="0 0 24 24" fill="none" {...rest}>
+      <rect x="3" y="3" width="18" height="18" rx="3.5" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="7.5" cy="8" r="1.15" fill="currentColor" />
+      <path d="M7.5 11v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path
+        d="M11.5 17v-3.5c0-1.4 1-2.3 2.2-2.3s2.1.8 2.1 2.2V17"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M11.5 11v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
