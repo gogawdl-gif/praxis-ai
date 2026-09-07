@@ -1,11 +1,14 @@
-import { ArrowRight, Circle, ScreenShare, Sparkles } from 'lucide-react'
+import { ArrowRight, ScreenShare, Sparkles, Swords } from 'lucide-react'
+import { DashboardMockup } from './DashboardMockup'
 import { Reveal } from './Reveal'
+import { SimulationMockup } from './SimulationMockup'
+import { TiltCard } from './TiltCard'
 
 export function FeaturePanels() {
   return (
     <section id="how-it-works" className="py-24">
       <div className="mx-auto max-w-6xl space-y-6 px-6">
-        {/* Panel A */}
+        {/* Panel A — real photo */}
         <Reveal>
           <div className="card grid gap-8 rounded-3xl p-8 md:grid-cols-2 md:items-center md:p-12">
             <div>
@@ -24,58 +27,50 @@ export function FeaturePanels() {
               </a>
             </div>
 
-            <div className="rounded-2xl border p-5" style={{ borderColor: '#e6e8f2', background: '#fbfbfe' }}>
-              <div className="flex items-center gap-2.5 rounded-xl bg-white p-3.5" style={{ boxShadow: '0 1px 2px rgba(20,20,31,0.04)' }}>
-                <span className="relative grid size-7 place-items-center rounded-full bg-rose-50 text-rose-500">
-                  <Circle size={8} className="fill-current" />
-                </span>
-                <div className="text-xs font-medium text-ink">Recording your screen…</div>
+            <TiltCard max={5} className="relative">
+              <div className="overflow-hidden rounded-[2.5rem_0.75rem_2.5rem_0.75rem] shadow-[0_20px_50px_-20px_rgba(20,20,31,0.3)]">
+                <img
+                  src="/images/retail-tablet.jpg"
+                  alt="Store manager walking through a process on a tablet"
+                  className="h-64 w-full object-cover md:h-72"
+                />
               </div>
-              <div className="mt-3 space-y-2 rounded-xl bg-white p-3.5 text-[13px] text-ink-soft" style={{ color: '#4b4b5c', boxShadow: '0 1px 2px rgba(20,20,31,0.04)' }}>
-                <p>“Okay — when a return comes in, first check the order…”</p>
+              <div className="absolute -bottom-4 left-5 flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-xs font-medium text-primary shadow-lg" style={{ color: '#3d4bf5' }}>
+                <Sparkles size={13} />
+                3 lessons generated
               </div>
-              <div className="mt-3 flex items-center gap-2 rounded-xl bg-primary/5 p-3.5 text-xs font-medium text-primary" style={{ backgroundColor: 'rgba(61,75,245,0.06)', color: '#3d4bf5' }}>
-                <Sparkles size={13} /> 3 lessons, 1 simulation, 1 quiz generated
-              </div>
+            </TiltCard>
+          </div>
+        </Reveal>
+
+        {/* Panel B — simulation mockup */}
+        <Reveal delay={0.06}>
+          <div className="card grid gap-8 rounded-3xl p-8 md:grid-cols-2 md:items-center md:p-12">
+            <div className="order-2 md:order-1">
+              <SimulationMockup />
+            </div>
+            <div className="order-1 md:order-2">
+              <span className="grid size-11 place-items-center rounded-xl bg-wash text-primary" style={{ backgroundColor: '#eef1fd', color: '#3d4bf5' }}>
+                <Swords size={20} />
+              </span>
+              <h3 className="mt-5 font-display text-2xl font-medium tracking-tight md:text-[2rem]">
+                Real practice, not slides
+              </h3>
+              <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-ink-soft" style={{ color: '#4b4b5c' }}>
+                Branching simulations put employees in the actual conversation — including the
+                awkward parts — before it counts for real.
+              </p>
+              <p className="mt-4 text-xs text-ink-dim" style={{ color: '#8888a0' }}>
+                Try the example →
+              </p>
             </div>
           </div>
         </Reveal>
 
-        {/* Panel B */}
-        <Reveal delay={0.08}>
+        {/* Panel C — animated dashboard */}
+        <Reveal delay={0.12}>
           <div className="card grid gap-8 rounded-3xl p-8 md:grid-cols-2 md:items-center md:p-12">
-            <div className="order-2 md:order-1 rounded-2xl border p-5" style={{ borderColor: '#e6e8f2', background: '#fbfbfe' }}>
-              <div className="grid grid-cols-3 gap-3">
-                {[
-                  { label: 'Active courses', value: '12' },
-                  { label: 'Avg. score', value: '87%' },
-                  { label: 'Updated', value: '3' },
-                ].map((s) => (
-                  <div key={s.label} className="rounded-xl bg-white p-3 text-center" style={{ boxShadow: '0 1px 2px rgba(20,20,31,0.04)' }}>
-                    <div className="font-display text-xl font-medium">{s.value}</div>
-                    <div className="mt-0.5 text-[10px] text-ink-dim" style={{ color: '#8888a0' }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-3 space-y-2">
-                {[
-                  { name: 'Return handling', pct: 92 },
-                  { name: 'New POS workflow', pct: 41 },
-                ].map((c) => (
-                  <div key={c.name} className="rounded-xl bg-white p-3" style={{ boxShadow: '0 1px 2px rgba(20,20,31,0.04)' }}>
-                    <div className="flex items-center justify-between text-xs font-medium text-ink">
-                      <span>{c.name}</span>
-                      <span className="text-ink-dim" style={{ color: '#8888a0' }}>{c.pct}%</span>
-                    </div>
-                    <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-wash" style={{ backgroundColor: '#eef1fd' }}>
-                      <div className="h-full rounded-full bg-primary" style={{ width: `${c.pct}%`, backgroundColor: '#3d4bf5' }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="order-1 md:order-2">
+            <div>
               <span className="grid size-11 place-items-center rounded-xl bg-wash text-primary" style={{ backgroundColor: '#eef1fd', color: '#3d4bf5' }}>
                 <Sparkles size={20} />
               </span>
@@ -90,6 +85,7 @@ export function FeaturePanels() {
                 See a course <ArrowRight size={14} />
               </a>
             </div>
+            <DashboardMockup />
           </div>
         </Reveal>
       </div>

@@ -6,12 +6,20 @@ export function FinalCta() {
     <section id="get-started" className="py-24">
       <div className="mx-auto max-w-4xl px-6">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl px-8 py-16 text-center" style={{ backgroundColor: '#3d4bf5' }}>
-            <div className="blob left-1/2 top-[-4rem] size-72 -translate-x-1/2 bg-white/10" />
+          <div className="relative overflow-hidden rounded-3xl px-8 py-20 text-center">
+            <img
+              src="/images/office-team.jpg"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-[50%_20%]"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(180deg, rgba(20,20,40,0.55), rgba(30,25,90,0.85))' }}
+            />
             <h2 className="relative font-display text-3xl font-medium tracking-tight text-white md:text-4xl">
               Teach it once. Train everyone.
             </h2>
-            <p className="relative mx-auto mt-4 max-w-sm text-white/80">
+            <p className="relative mx-auto mt-4 max-w-sm text-white/85">
               Bring one process to Praxis — free, no setup call required.
             </p>
             <a
