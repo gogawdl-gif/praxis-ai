@@ -5,38 +5,22 @@ const TIERS = [
   {
     name: 'Starter',
     price: '$0',
-    period: 'to try it out',
-    desc: 'Teach your first process and see the full course Praxis builds from it.',
-    features: ['1 active course', 'Upload or screen-record', 'Quizzes & basic assessment', 'Up to 10 employees'],
+    features: ['1 active course', 'Upload or screen-record', 'Up to 10 employees'],
     cta: 'Start free',
     highlight: false,
   },
   {
     name: 'Business',
     price: '$14',
-    period: '/ employee / month',
-    desc: 'For teams that train continuously and need it kept up to date.',
-    features: [
-      'Unlimited courses',
-      'Simulations & branching practice',
-      'Auto-updating training',
-      'Manager dashboard & reporting',
-      'SSO',
-    ],
+    period: '/ employee / mo',
+    features: ['Unlimited courses', 'Simulations & practice', 'Auto-updating training', 'SSO'],
     cta: 'Start free',
     highlight: true,
   },
   {
     name: 'Enterprise',
     price: 'Custom',
-    period: 'volume & compliance',
-    desc: 'Multi-location or regulated teams with custom retention and controls.',
-    features: [
-      'Everything in Business',
-      'Custom data retention',
-      'Advanced audit & permissions',
-      'Dedicated support',
-    ],
+    features: ['Everything in Business', 'Custom data retention', 'Dedicated support'],
     cta: 'Talk to sales',
     highlight: false,
   },
@@ -44,47 +28,45 @@ const TIERS = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-3xl font-semibold tracking-tight md:text-5xl">
-            Priced like software, not like a project.
+    <section id="pricing" className="wash-section py-24">
+      <div className="mx-auto max-w-5xl px-6">
+        <Reveal className="mx-auto max-w-lg text-center">
+          <h2 className="font-display text-3xl font-medium tracking-tight md:text-4xl">
+            Priced like software
           </h2>
-          <p className="mt-5 text-lg text-fg-muted" style={{ color: '#a6a6b3' }}>
-            No implementation fee. No per-course consulting bill.
+          <p className="mt-3 text-ink-soft" style={{ color: '#4b4b5c' }}>
+            No implementation fee. No consulting bill.
           </p>
         </Reveal>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {TIERS.map((tier, i) => (
-            <Reveal key={tier.name} delay={i * 0.08}>
+            <Reveal key={tier.name} delay={i * 0.06}>
               <div
-                className={`relative flex h-full flex-col rounded-2xl p-8 ${
-                  tier.highlight
-                    ? 'card-glow border-2 border-violet-500/40'
-                    : 'border border-white/10 bg-white/[0.02]'
+                className={`relative flex h-full flex-col rounded-2xl p-7 ${
+                  tier.highlight ? 'card-soft bg-white' : 'card bg-white'
                 }`}
               >
                 {tier.highlight && (
-                  <span className="absolute -top-3 left-8 rounded-full bg-gradient-to-r from-violet-500 to-cyan-400 px-3 py-1 text-[11px] font-semibold text-black">
-                    Most teams pick this
+                  <span
+                    className="absolute -top-3 left-7 rounded-full px-3 py-1 text-[11px] font-medium text-white"
+                    style={{ backgroundColor: '#3d4bf5' }}
+                  >
+                    Most popular
                   </span>
                 )}
-                <h3 className="font-display text-lg font-semibold">{tier.name}</h3>
-                <div className="mt-4 flex items-baseline gap-1.5">
-                  <span className="font-display text-4xl font-semibold tracking-tight">{tier.price}</span>
-                  <span className="text-sm text-fg-dim" style={{ color: '#6f6f7d' }}>
-                    {tier.period}
-                  </span>
+                <h3 className="font-display text-lg font-medium">{tier.name}</h3>
+                <div className="mt-3 flex items-baseline gap-1.5">
+                  <span className="font-display text-3xl font-medium tracking-tight">{tier.price}</span>
+                  {tier.period && (
+                    <span className="text-xs text-ink-dim" style={{ color: '#8888a0' }}>{tier.period}</span>
+                  )}
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-fg-muted" style={{ color: '#a6a6b3' }}>
-                  {tier.desc}
-                </p>
 
-                <ul className="mt-6 flex-1 space-y-3">
+                <ul className="mt-5 flex-1 space-y-2.5">
                   {tier.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-white/90">
-                      <Check size={15} className="mt-0.5 shrink-0 text-cyan-300" style={{ color: '#67e8f9' }} />
+                    <li key={f} className="flex items-start gap-2 text-sm text-ink-soft" style={{ color: '#4b4b5c' }}>
+                      <Check size={15} className="mt-0.5 shrink-0 text-primary" style={{ color: '#3d4bf5' }} />
                       {f}
                     </li>
                   ))}
@@ -92,9 +74,10 @@ export function Pricing() {
 
                 <a
                   href="#get-started"
-                  className={`mt-8 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-transform hover:scale-[1.02] ${
-                    tier.highlight ? 'bg-white text-black' : 'border border-white/15 bg-white/[0.04] text-white'
+                  className={`mt-6 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-medium transition-transform hover:scale-[1.02] ${
+                    tier.highlight ? 'bg-primary text-white' : 'border border-line text-ink'
                   }`}
+                  style={tier.highlight ? { backgroundColor: '#3d4bf5' } : { borderColor: '#e6e8f2' }}
                 >
                   {tier.cta}
                 </a>

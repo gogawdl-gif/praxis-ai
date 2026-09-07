@@ -3,35 +3,24 @@ import { Reveal } from './Reveal'
 
 export function FinalCta() {
   return (
-    <section id="get-started" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6">
+    <section id="get-started" className="py-24">
+      <div className="mx-auto max-w-4xl px-6">
         <Reveal>
-          <div className="grain relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-violet-600/25 via-[#0d0d13] to-cyan-500/10 px-8 py-16 text-center md:px-16 md:py-20">
-            <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-violet-500/30 blur-[100px]" />
-            <h2 className="relative font-display text-3xl font-semibold tracking-tight md:text-5xl">
-              Teach it once.
-              <br />
-              Train everyone.
+          <div className="relative overflow-hidden rounded-3xl px-8 py-16 text-center" style={{ backgroundColor: '#3d4bf5' }}>
+            <div className="blob left-1/2 top-[-4rem] size-72 -translate-x-1/2 bg-white/10" />
+            <h2 className="relative font-display text-3xl font-medium tracking-tight text-white md:text-4xl">
+              Teach it once. Train everyone.
             </h2>
-            <p className="relative mx-auto mt-5 max-w-md text-lg text-fg-muted" style={{ color: '#c8c8d1' }}>
-              Bring one process to Praxis and see the full course it builds — free, no setup call
-              required.
+            <p className="relative mx-auto mt-4 max-w-sm text-white/80">
+              Bring one process to Praxis — free, no setup call required.
             </p>
-            <div className="relative mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a
-                href="#"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
-              >
-                Start free
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="#pricing"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.06]"
-              >
-                View pricing
-              </a>
-            </div>
+            <a
+              href="#"
+              className="group relative mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
+            >
+              Start free
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+            </a>
           </div>
         </Reveal>
       </div>
