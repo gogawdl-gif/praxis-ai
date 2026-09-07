@@ -4,7 +4,7 @@ import { Reveal } from './Reveal'
 
 const STATS = [
   { icon: TrendingUp, node: <CountUp value={3} suffix="x" />, label: 'faster than building slides by hand' },
-  { icon: UserMinus, node: <CountUp value={0} />, label: 'instructional designers needed' },
+  { icon: UserMinus, node: 'Zero', label: 'instructional designers needed' },
   { icon: MessageSquare, node: <CountUp value={1} />, label: 'sentence to update a lesson' },
   { icon: Globe2, node: '24/7', label: 'available, every language' },
 ]

@@ -6,12 +6,12 @@ const HEADLINE = 'Turn what your best people know into training everyone can pas
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-40 pb-28 md:pt-48 md:pb-32">
+    <section id="top" className="relative overflow-hidden pt-32 pb-16 md:pt-48 md:pb-32">
       <div className="pointer-events-none absolute inset-0 -z-10 wash-section" />
 
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-[1.05fr_1fr] md:gap-8">
         <div className="text-center md:text-left">
-          <h1 className="font-display text-4xl font-normal leading-[1.1] tracking-tight text-ink md:text-[3.1rem]">
+          <h1 className="font-display text-[1.9rem] font-normal leading-[1.15] tracking-tight text-ink md:text-[3.1rem] md:leading-[1.1]">
             {HEADLINE.split(' ').map((word, i, arr) => (
               // The space is a plain sibling text node, not part of the
               // inline-block span, so it can't get swallowed and still
