@@ -11,7 +11,7 @@ const TILES = [
   {
     src: '/images/gallery-it.jpg',
     label: 'Software & IT',
-    note: 'Deploys & access requests',
+    note: 'Setup guides & troubleshooting',
     // mobile: col 1, row 2  |  desktop: col 3, row 1
     className: 'col-start-1 col-end-2 row-start-2 row-end-3 md:col-start-3 md:col-end-4 md:row-start-1 md:row-end-2',
   },

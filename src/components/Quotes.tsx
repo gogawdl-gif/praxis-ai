@@ -15,7 +15,7 @@ const OTHERS = [
   },
   {
     quote: 'I told Grasp what changed in two sentences. Every lesson updated itself.',
-    role: 'RevOps manager',
+    role: 'Operations manager',
     avatar: '/images/avatar-3.jpg',
   },
 ]

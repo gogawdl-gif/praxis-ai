@@ -9,14 +9,11 @@ const PLANS = [
 ]
 
 const ROWS: { label: string; values: [string | boolean, string | boolean, string | boolean] }[] = [
-  { label: 'Employees', values: ['Up to 10', 'Unlimited', 'Unlimited'] },
-  { label: 'Active courses', values: ['1', 'Unlimited', 'Unlimited'] },
-  { label: 'Screen, voice & file capture', values: [true, true, true] },
-  { label: 'Simulations & practice', values: [false, true, true] },
-  { label: 'Auto-updating training', values: [false, true, true] },
-  { label: 'SSO & permissions', values: [false, true, true] },
-  { label: 'Custom data retention', values: [false, false, true] },
-  { label: 'Dedicated support', values: [false, false, true] },
+  { label: 'Team members', values: ['Up to 10', 'Unlimited', 'Unlimited'] },
+  { label: 'Courses', values: ['1', 'Unlimited', 'Unlimited'] },
+  { label: 'Practice & quizzes', values: [false, true, true] },
+  { label: 'Updates itself when a process changes', values: [false, true, true] },
+  { label: 'Support', values: ['Email', 'Priority', 'Dedicated'] },
 ]
 
 function Cell({ value }: { value: string | boolean }) {
@@ -44,7 +41,7 @@ export function Pricing() {
         </Reveal>
 
         <Reveal delay={0.1} className="mt-12 overflow-x-auto">
-          <div className="min-w-[640px] overflow-hidden rounded-2xl border border-line" style={{ borderColor: '#e6e8f2' }}>
+          <div className="min-w-[560px] overflow-hidden rounded-2xl border border-line" style={{ borderColor: '#e6e8f2' }}>
             <div className="grid grid-cols-[1.3fr_1fr_1fr_1fr] bg-white">
               <div className="border-b p-6" style={{ borderColor: '#e6e8f2' }} />
               {PLANS.map((plan) => (
@@ -106,6 +103,13 @@ export function Pricing() {
               ))}
             </div>
           </div>
+        </Reveal>
+
+        <Reveal delay={0.16} className="mt-6">
+          <p className="text-center text-xs text-ink-dim" style={{ color: '#8888a0' }}>
+            Enterprise also includes single sign-on, custom data retention, and a dedicated
+            onboarding specialist.
+          </p>
         </Reveal>
       </div>
     </section>

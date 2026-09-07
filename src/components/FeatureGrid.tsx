@@ -4,8 +4,8 @@ import { Reveal } from './Reveal'
 const ITEMS = [
   { icon: GaugeCircle, title: 'Every quiz is scored', body: "So you stop guessing who's ready and start knowing." },
   { icon: Globe2, title: 'Works in 50+ languages', body: 'One recording covers every office, automatically translated.' },
-  { icon: ShieldCheck, title: 'Your own SSO', body: 'Provision and deprovision access the way IT already does it.' },
-  { icon: Lock, title: 'Encrypted end to end', body: 'What you teach it stays inside your workspace.' },
+  { icon: ShieldCheck, title: 'Log in the way you already do', body: 'Works with the account system your IT team already set up.' },
+  { icon: Lock, title: 'Kept private', body: 'What you teach it stays inside your workspace, never shared.' },
 ]
 
 export function FeatureGrid() {

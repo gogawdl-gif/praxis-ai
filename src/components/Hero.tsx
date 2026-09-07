@@ -22,17 +22,21 @@ export function Hero() {
 
       <div className="mx-auto max-w-4xl px-6 text-center">
         <h1 className="font-display text-4xl font-normal leading-[1.1] tracking-tight text-ink md:text-[3.4rem]">
-          {HEADLINE.split(' ').map((word, i) => (
-            <motion.span
-              key={i}
-              className="inline-block"
-              initial={{ opacity: 0, y: '0.5em' }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 + i * 0.035, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {word}
-              {i < HEADLINE.split(' ').length - 1 ? ' ' : ''}
-            </motion.span>
+          {HEADLINE.split(' ').map((word, i, arr) => (
+            // The space is a plain sibling text node, not part of the
+            // inline-block span, so it can't get swallowed and still
+            // gives the browser a normal line-wrap point.
+            <span key={i}>
+              <motion.span
+                className="inline-block"
+                initial={{ opacity: 0, y: '0.5em' }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 + i * 0.035, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {word}
+              </motion.span>
+              {i < arr.length - 1 ? ' ' : ''}
+            </span>
           ))}
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg text-ink-soft" style={{ color: '#4b4b5c' }}>
