@@ -1,3 +1,5 @@
+import { Logo } from './Logo'
+
 const COLUMNS = [
   { title: 'Product', links: ['Platform', 'How it works', 'Pricing'] },
   { title: 'Company', links: ['About', 'Careers', 'Contact'] },
@@ -10,14 +12,9 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="grid size-8 place-items-center rounded-lg" style={{ backgroundColor: '#3d4bf5' }}>
-                <span className="size-2.5 rounded-sm bg-white" />
-              </span>
-              <span className="font-display text-lg font-medium tracking-tight">Praxis</span>
-            </div>
+            <Logo />
             <p className="mt-4 max-w-xs text-sm text-ink-dim" style={{ color: '#8888a0' }}>
-              Teach your business to AI once. Praxis keeps the training current.
+              Show Mobbilise a process once. It builds the course and keeps it current for you.
             </p>
           </div>
 
@@ -40,7 +37,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 border-t border-line pt-6 text-center text-xs text-ink-dim" style={{ borderColor: '#e6e8f2', color: '#8888a0' }}>
-          © {new Date().getFullYear()} Praxis. All rights reserved.
+          © {new Date().getFullYear()} Mobbilise. All rights reserved.
         </div>
       </div>
     </footer>

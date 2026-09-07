@@ -17,7 +17,7 @@ export function SimulationMockup() {
         <span className="size-2.5 rounded-full bg-black/10" />
         <span className="size-2.5 rounded-full bg-black/10" />
         <span className="ml-3 text-xs text-ink-dim" style={{ color: '#8888a0' }}>
-          Simulation — Handling a billing dispute
+          Simulation: handling a billing dispute
         </span>
       </div>
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { Logo } from './Logo'
 
 const LINKS = [
   { label: 'Platform', href: '#platform' },
@@ -25,11 +26,8 @@ export function Nav() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-2.5">
-          <span className="grid size-8 place-items-center rounded-lg bg-primary" style={{ backgroundColor: '#3d4bf5' }}>
-            <span className="size-2.5 rounded-sm bg-white" />
-          </span>
-          <span className="font-display text-lg font-medium tracking-tight">Praxis</span>
+        <a href="#top">
+          <Logo />
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">

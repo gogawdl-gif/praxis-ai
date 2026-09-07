@@ -20,7 +20,7 @@ export function FinalCta() {
               Teach it once. Train everyone.
             </h2>
             <p className="relative mx-auto mt-4 max-w-sm text-white/85">
-              Bring one process to Praxis — free, no setup call required.
+              Bring one process. See the full course it builds, free, no setup call needed.
             </p>
             <a
               href="#"

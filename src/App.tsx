@@ -1,5 +1,5 @@
+import { CaptureShowcase } from './components/CaptureShowcase'
 import { FeatureGrid } from './components/FeatureGrid'
-import { FeaturePanels } from './components/FeaturePanels'
 import { FinalCta } from './components/FinalCta'
 import { Footer } from './components/Footer'
 import { Gallery } from './components/Gallery'
@@ -9,6 +9,7 @@ import { Nav } from './components/Nav'
 import { Pricing } from './components/Pricing'
 import { Quotes } from './components/Quotes'
 import { Stats } from './components/Stats'
+import { StickySteps } from './components/StickySteps'
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <IndustryMarquee />
         <Stats />
         <Gallery />
-        <FeaturePanels />
+        <CaptureShowcase />
+        <StickySteps />
         <FeatureGrid />
         <Quotes />
         <Pricing />

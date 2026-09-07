@@ -1,16 +1,18 @@
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Circle, Sparkles, Zap } from 'lucide-react'
+import { ArrowRight, Circle } from 'lucide-react'
+import { IconPulse } from './icons'
 import { TiltCard } from './TiltCard'
 
 const TOPICS = [
   { label: 'Onboarding', course: 'New hire IT setup', line: 'First you provision SSO, then walk them through the VPN…' },
   { label: 'Support', course: 'Handling a billing dispute', line: 'Check the account in Stripe, then look at the invoice history…' },
   { label: 'Compliance', course: 'Customer data handling', line: 'Every record needs to be tagged before it can be exported…' },
-  { label: 'Process updates', course: 'New CRM workflow', line: 'Skip the old lead form — it moved into HubSpot last week…' },
+  { label: 'Process updates', course: 'New CRM workflow', line: 'Skip the old lead form, it moved into HubSpot last week…' },
 ]
 
 const bars = [5, 10, 7, 13, 9, 14, 6, 11]
+const HEADLINE = 'Turn what your best people know into training everyone can pass.'
 
 export function Hero() {
   const [active, setActive] = useState(0)
@@ -37,12 +39,23 @@ export function Hero() {
       />
 
       <div className="mx-auto max-w-4xl px-6 text-center">
-        <h1 className="font-display text-4xl font-normal leading-[1.08] tracking-tight text-ink md:text-6xl">
-          Teach your business to AI. <span className="text-primary" style={{ color: '#3d4bf5' }}>Once.</span>
+        <h1 className="font-display text-4xl font-normal leading-[1.1] tracking-tight text-ink md:text-[3.4rem]">
+          {HEADLINE.split(' ').map((word, i) => (
+            <motion.span
+              key={i}
+              className="inline-block"
+              initial={{ opacity: 0, y: '0.5em' }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 + i * 0.035, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {word}
+              {i < HEADLINE.split(' ').length - 1 ? ' ' : ''}
+            </motion.span>
+          ))}
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg text-ink-soft" style={{ color: '#4b4b5c' }}>
-          Upload your materials or record your screen — Praxis turns it into lessons, practice,
-          and quizzes automatically.
+          Show it a process once. Mobbilise writes the lessons, the practice, and the quizzes, and
+          keeps every course current when the process changes.
         </p>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -105,12 +118,12 @@ export function Hero() {
 
         <div className="z-0 flex items-center justify-center py-2 md:py-0 md:px-3">
           <motion.div
-            animate={{ x: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="grid size-9 place-items-center rounded-full bg-white text-primary shadow-md md:rotate-90"
+            animate={{ opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            className="grid size-9 place-items-center rounded-full bg-white text-primary shadow-md"
             style={{ color: '#3d4bf5' }}
           >
-            <Zap size={16} />
+            <IconPulse size={16} className="rotate-90 md:rotate-0" />
           </motion.div>
         </div>
 
@@ -121,7 +134,7 @@ export function Hero() {
               <span className="size-2.5 rounded-full bg-black/10" />
               <span className="size-2.5 rounded-full bg-black/10" />
               <span className="ml-3 text-xs text-ink-dim" style={{ color: '#8888a0' }}>
-                Praxis — training agent
+                Mobbilise
               </span>
             </div>
 
@@ -140,7 +153,7 @@ export function Hero() {
                     Now teaching: {topic.course}
                   </div>
                   <p className="mt-2 text-[13px] text-ink-soft" style={{ color: '#4b4b5c' }}>
-                    “{topic.line}”
+                    "{topic.line}"
                   </p>
                   <div className="mt-3 flex items-end gap-[3px]">
                     {bars.map((h, i) => (
@@ -156,8 +169,8 @@ export function Hero() {
                 </div>
 
                 <div className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-ink-dim" style={{ color: '#8888a0' }}>
-                  <Sparkles size={11} />
-                  Generated
+                  <span className="size-1.5 rounded-full bg-primary" style={{ backgroundColor: '#3d4bf5' }} />
+                  Auto-generated
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {['Lesson', 'Simulation', 'Quiz'].map((g) => (

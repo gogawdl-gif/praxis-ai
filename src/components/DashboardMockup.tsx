@@ -18,7 +18,7 @@ export function DashboardMockup() {
         <span className="size-2.5 rounded-full bg-black/10" />
         <span className="size-2.5 rounded-full bg-black/10" />
         <span className="ml-3 text-xs text-ink-dim" style={{ color: '#8888a0' }}>
-          app.praxis.ai/dashboard
+          app.mobbilise.io/dashboard
         </span>
       </div>
 
