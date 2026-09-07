@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { BarChart3, Layers, ScreenShare } from 'lucide-react'
+import { Layers, ScreenShare } from 'lucide-react'
 import { type ComponentType, useEffect, useState } from 'react'
 import { DashboardMockup } from './DashboardMockup'
 import { IconDropFile, IconMic } from './icons'
@@ -27,13 +27,12 @@ const INPUT: Item[] = [
   { icon: IconDropFile, title: 'Drag in what you have', body: 'Docs, decks, old videos.', Visual: DropzoneMockup },
 ]
 
+// Output (what's built) and Results (what you get to see) are one
+// mockup with five sub-tabs, not two separate mini-mockups.
 const OUTPUT_SUB: SubItem[] = [
   { label: 'Lesson', Visual: LessonMockup },
   { label: 'Simulation', Visual: SimulationMockup },
   { label: 'Quiz', Visual: QuizMockup },
-]
-
-const RESULTS_SUB: SubItem[] = [
   { label: 'Scores', Visual: DashboardMockup },
   { label: 'Updates', Visual: UpdateMockup },
 ]
@@ -68,13 +67,11 @@ function SubTabRow({
   title,
   body,
   items,
-  delay,
 }: {
   icon: ComponentType<{ size?: number }>
   title: string
   body: string
   items: SubItem[]
-  delay: number
 }) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -88,58 +85,55 @@ function SubTabRow({
   const Visual = items[active].Visual
 
   return (
-    <Reveal delay={delay}>
-      <div
-        className="grid gap-5 border-t py-7 first:border-t-0 first:pt-0 md:grid-cols-[minmax(0,220px)_1fr] md:items-center md:gap-10"
-        style={{ borderColor: '#e6e8f2' }}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        <div>
-          <div className="flex items-center gap-3">
-            <span className="grid size-9 shrink-0 place-items-center rounded-lg" style={{ backgroundColor: '#eef1fd', color: '#3d4bf5' }}>
-              <Icon size={16} />
-            </span>
-            <div>
-              <h4 className="font-display text-base font-medium">{title}</h4>
-              <p className="text-sm" style={{ color: '#8888a0' }}>
-                {body}
-              </p>
-            </div>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {items.map((it, i) => (
-              <button
-                key={it.label}
-                onClick={() => setActive(i)}
-                className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
-                style={
-                  active === i
-                    ? { backgroundColor: '#3d4bf5', borderColor: '#3d4bf5', color: 'white' }
-                    : { borderColor: '#e6e8f2', color: '#4b4b5c' }
-                }
-              >
-                {it.label}
-              </button>
-            ))}
+    <div
+      className="grid gap-5 md:grid-cols-[minmax(0,220px)_1fr] md:items-center md:gap-10"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div>
+        <div className="flex items-center gap-3">
+          <span className="grid size-9 shrink-0 place-items-center rounded-lg" style={{ backgroundColor: '#eef1fd', color: '#3d4bf5' }}>
+            <Icon size={16} />
+          </span>
+          <div>
+            <h4 className="font-display text-base font-medium">{title}</h4>
+            <p className="text-sm" style={{ color: '#8888a0' }}>
+              {body}
+            </p>
           </div>
         </div>
-        <div className="h-[260px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="h-full"
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {items.map((it, i) => (
+            <button
+              key={it.label}
+              onClick={() => setActive(i)}
+              className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
+              style={
+                active === i
+                  ? { backgroundColor: '#3d4bf5', borderColor: '#3d4bf5', color: 'white' }
+                  : { borderColor: '#e6e8f2', color: '#4b4b5c' }
+              }
             >
-              <Visual />
-            </motion.div>
-          </AnimatePresence>
+              {it.label}
+            </button>
+          ))}
         </div>
       </div>
-    </Reveal>
+      <div className="h-[260px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="h-full"
+          >
+            <Visual />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
   )
 }
 
@@ -201,24 +195,15 @@ export function HowItWorks() {
             ))}
           </MacroSection>
 
-          <MacroSection n="02" label="Output" title="What Learnik builds from that">
-            <SubTabRow
-              icon={Layers}
-              title="An interactive course"
-              body="Every recording becomes all three."
-              items={OUTPUT_SUB}
-              delay={0}
-            />
-          </MacroSection>
-
-          <MacroSection n="03" label="Results" title="What you actually get to see">
-            <SubTabRow
-              icon={BarChart3}
-              title="Always up to date"
-              body="Who's ready, and what changed."
-              items={RESULTS_SUB}
-              delay={0}
-            />
+          <MacroSection n="02" label="Output & results" title="What Learnik builds, and what you see">
+            <Reveal delay={0.1}>
+              <SubTabRow
+                icon={Layers}
+                title="One recording becomes all of this"
+                body="Click through what it produces."
+                items={OUTPUT_SUB}
+              />
+            </Reveal>
           </MacroSection>
         </div>
       </div>

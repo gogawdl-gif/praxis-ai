@@ -44,7 +44,7 @@ function PlanHeader({ plan }: { plan: (typeof PLANS)[number] }) {
       </div>
       <h3 className="font-display text-base font-medium">{plan.name}</h3>
       <div className="mt-2 flex items-baseline justify-center gap-1">
-        <span className="font-display text-2xl font-medium tracking-tight">{plan.price}</span>
+        <span className="font-display text-3xl font-medium tracking-tight">{plan.price}</span>
         {plan.period && (
           <span className="text-[11px] text-ink-dim" style={{ color: '#8888a0' }}>
             {plan.period}
@@ -108,9 +108,9 @@ export function Pricing() {
 
         {/* Desktop: comparison table */}
         <Reveal delay={0.1} className="mt-12 hidden md:block">
-          <div className="card-soft mx-auto max-w-xl overflow-hidden rounded-2xl border border-line" style={{ borderColor: '#e6e8f2' }}>
-            <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-white">
-              <div className="border-b p-6" style={{ borderColor: '#e6e8f2' }}>
+          <div className="card-soft mx-auto max-w-2xl overflow-hidden rounded-2xl border border-line" style={{ borderColor: '#e6e8f2' }}>
+            <div className="grid grid-cols-[1.3fr_1fr_1fr] bg-white">
+              <div className="border-b p-7" style={{ borderColor: '#e6e8f2' }}>
                 <div className="mb-2 h-[22px]" />
                 <div className="font-display text-lg font-medium tracking-tight text-ink">Compare plans</div>
                 <p className="mt-1.5 text-sm" style={{ color: '#8888a0' }}>
@@ -120,7 +120,7 @@ export function Pricing() {
               {PLANS.map((plan) => (
                 <div
                   key={plan.name}
-                  className="border-b border-l p-6 text-center"
+                  className="border-b border-l p-7 text-center"
                   style={{ borderColor: '#e6e8f2', backgroundColor: plan.highlight ? 'rgba(61,75,245,0.045)' : undefined }}
                 >
                   <PlanHeader plan={plan} />
@@ -130,7 +130,7 @@ export function Pricing() {
               {ROWS.map((row) => (
                 <Fragment key={row.label}>
                   <div
-                    className="border-b p-4 pl-6 text-sm text-ink-soft"
+                    className="border-b p-5 pl-7 text-sm text-ink-soft"
                     style={{ borderColor: '#e6e8f2', color: '#4b4b5c' }}
                   >
                     {row.label}
@@ -138,7 +138,7 @@ export function Pricing() {
                   {row.values.map((v, i) => (
                     <div
                       key={`${row.label}-${i}`}
-                      className="border-b border-l p-4 text-center"
+                      className="border-b border-l p-5 text-center"
                       style={{
                         borderColor: '#e6e8f2',
                         backgroundColor: PLANS[i].highlight ? 'rgba(61,75,245,0.045)' : undefined,

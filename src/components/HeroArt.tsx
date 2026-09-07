@@ -86,7 +86,7 @@ export function HeroArt() {
         transition={{ duration: 9, delay: 1, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <Float className="left-2 top-10" duration={6} amplitude={12} depth={14} parallaxX={parallaxX}>
+      <Float className="left-2 top-6 sm:top-10" duration={6} amplitude={12} depth={14} parallaxX={parallaxX}>
         <Chip>
           <span className="grid size-5 place-items-center rounded-full bg-emerald-500">
             <Check size={11} className="text-white" strokeWidth={3} />
@@ -95,7 +95,7 @@ export function HeroArt() {
         </Chip>
       </Float>
 
-      <Float className="right-4 top-6" duration={7} delay={0.15} amplitude={9} rotate={-4} depth={8} parallaxX={parallaxX}>
+      <Float className="right-1 top-28 sm:right-4 sm:top-6" duration={7} delay={0.2} amplitude={9} rotate={-4} depth={8} parallaxX={parallaxX}>
         <Chip>
           <span className="grid size-5 place-items-center rounded-full bg-primary" style={{ backgroundColor: '#3d4bf5' }}>
             <GitBranch size={11} className="text-white" />
@@ -104,7 +104,7 @@ export function HeroArt() {
         </Chip>
       </Float>
 
-      <Float className="left-6 bottom-24" duration={8} delay={0.3} amplitude={10} rotate={4} depth={18} parallaxX={parallaxX}>
+      <Float className="left-6 bottom-24" duration={8} delay={0.4} amplitude={10} rotate={4} depth={18} parallaxX={parallaxX}>
         <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-[0_16px_32px_-12px_rgba(20,20,31,0.2)]">
           <img src="/images/avatar-2.jpg" alt="" className="size-9 rounded-full object-cover" />
           <div>
@@ -116,18 +116,18 @@ export function HeroArt() {
         </div>
       </Float>
 
-      <Float className="right-8 bottom-6" duration={6.5} delay={0.45} amplitude={11} rotate={-3} depth={11} parallaxX={parallaxX}>
+      <Float className="right-8 bottom-6" duration={6.5} delay={0.6} amplitude={11} rotate={-3} depth={11} parallaxX={parallaxX}>
         <div className="grid place-items-center rounded-2xl bg-white p-4 shadow-[0_16px_32px_-12px_rgba(20,20,31,0.2)]">
           <div className="font-display text-2xl font-medium text-primary" style={{ color: '#3d4bf5' }}>
-            5/5
+            100%
           </div>
           <div className="text-[11px]" style={{ color: '#8888a0' }}>
-            Quiz passed
+            Quiz score
           </div>
         </div>
       </Float>
 
-      <Float className="left-1/2 top-1/2 -translate-x-1/2" duration={5.5} delay={0.6} amplitude={8} depth={6} parallaxX={parallaxX}>
+      <Float className="left-1/2 top-44 -translate-x-1/2 sm:top-1/2" duration={5.5} delay={0.8} amplitude={8} depth={6} parallaxX={parallaxX}>
         <Chip>
           <span className="size-2 rounded-full bg-primary" style={{ backgroundColor: '#3d4bf5' }} />
           Updated automatically
