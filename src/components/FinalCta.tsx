@@ -20,13 +20,14 @@ export function FinalCta() {
               Teach it once. Every new hire learns it right.
             </h2>
             <p className="relative mx-auto mt-4 max-w-sm text-white/85">
-              Bring one process. See the full course it builds, free, no setup call needed.
+              Bring one process. See the full course it builds in your 7-day free trial, no
+              credit card needed.
             </p>
             <a
               href="#"
               className="group relative mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
             >
-              Start free
+              Start free trial
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>

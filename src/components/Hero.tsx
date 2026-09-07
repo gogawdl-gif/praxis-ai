@@ -63,7 +63,7 @@ export function Hero() {
         </div>
 
         <p className="mt-6 text-xs text-ink-dim" style={{ color: '#8888a0' }}>
-          No credit card. No setup call. See a real course before you talk to anyone.
+          7-day free trial. No credit card, no setup call.
         </p>
       </div>
     </section>

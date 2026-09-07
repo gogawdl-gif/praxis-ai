@@ -1,4 +1,3 @@
-import { CaptureShowcase } from './components/CaptureShowcase'
 import { FeatureGrid } from './components/FeatureGrid'
 import { FinalCta } from './components/FinalCta'
 import { Footer } from './components/Footer'
@@ -20,7 +19,6 @@ function App() {
         <IndustryMarquee />
         <Stats />
         <Gallery />
-        <CaptureShowcase />
         <HowItWorks />
         <FeatureGrid />
         <Quotes />

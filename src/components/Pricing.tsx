@@ -3,17 +3,17 @@ import { Fragment } from 'react'
 import { Reveal } from './Reveal'
 
 const PLANS = [
-  { name: 'Starter', price: '$0', period: '', cta: 'Start free', highlight: false },
-  { name: 'Business', price: '$14', period: '/employee/mo', cta: 'Start free', highlight: true },
+  { name: 'Business', price: '$14', period: '/employee/mo', cta: 'Start free trial', highlight: true },
   { name: 'Enterprise', price: 'Custom', period: '', cta: 'Talk to sales', highlight: false },
 ]
 
-const ROWS: { label: string; values: [string | boolean, string | boolean, string | boolean] }[] = [
-  { label: 'Team members', values: ['Up to 10', 'Unlimited', 'Unlimited'] },
-  { label: 'Courses', values: ['1', 'Unlimited', 'Unlimited'] },
-  { label: 'Practice & quizzes', values: [false, true, true] },
-  { label: 'Updates itself when a process changes', values: [false, true, true] },
-  { label: 'Support', values: ['Email', 'Priority', 'Dedicated'] },
+const ROWS: { label: string; values: [string | boolean, string | boolean] }[] = [
+  { label: 'Team members', values: ['Unlimited', 'Unlimited'] },
+  { label: 'Courses', values: ['Unlimited', 'Unlimited'] },
+  { label: 'Practice & quizzes', values: [true, true] },
+  { label: 'Updates itself when a process changes', values: [true, true] },
+  { label: 'Single sign-on (SSO)', values: [false, true] },
+  { label: 'Support', values: ['Priority email', 'Dedicated + onboarding'] },
 ]
 
 function Cell({ value }: { value: string | boolean }) {
@@ -36,13 +36,13 @@ export function Pricing() {
             Straightforward pricing
           </h2>
           <p className="mt-3 text-ink-soft" style={{ color: '#4b4b5c' }}>
-            No implementation fees. No consulting contract buried in the fine print.
+            Every plan starts with a 7-day free trial. No credit card required.
           </p>
         </Reveal>
 
         <Reveal delay={0.1} className="mt-12 overflow-x-auto">
-          <div className="min-w-[560px] overflow-hidden rounded-2xl border border-line" style={{ borderColor: '#e6e8f2' }}>
-            <div className="grid grid-cols-[1.3fr_1fr_1fr_1fr] bg-white">
+          <div className="mx-auto min-w-[440px] max-w-xl overflow-hidden rounded-2xl border border-line" style={{ borderColor: '#e6e8f2' }}>
+            <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-white">
               <div className="border-b p-6" style={{ borderColor: '#e6e8f2' }} />
               {PLANS.map((plan) => (
                 <div
@@ -107,8 +107,7 @@ export function Pricing() {
 
         <Reveal delay={0.16} className="mt-6">
           <p className="text-center text-xs text-ink-dim" style={{ color: '#8888a0' }}>
-            Enterprise also includes single sign-on, custom data retention, and a dedicated
-            onboarding specialist.
+            No implementation fees. No consulting contract buried in the fine print.
           </p>
         </Reveal>
       </div>
