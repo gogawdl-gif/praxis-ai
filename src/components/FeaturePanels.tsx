@@ -30,8 +30,8 @@ export function FeaturePanels() {
             <TiltCard max={5} className="relative">
               <div className="overflow-hidden rounded-[2.5rem_0.75rem_2.5rem_0.75rem] shadow-[0_20px_50px_-20px_rgba(20,20,31,0.3)]">
                 <img
-                  src="/images/retail-tablet.jpg"
-                  alt="Store manager walking through a process on a tablet"
+                  src="/images/panel-desk.jpg"
+                  alt="Team reviewing a process together at their laptops"
                   className="h-64 w-full object-cover md:h-72"
                 />
               </div>

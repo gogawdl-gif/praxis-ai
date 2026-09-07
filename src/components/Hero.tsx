@@ -4,10 +4,10 @@ import { ArrowRight, Circle, Sparkles, Zap } from 'lucide-react'
 import { TiltCard } from './TiltCard'
 
 const TOPICS = [
-  { label: 'Onboarding', course: 'Opening store procedure', line: 'First you disarm the alarm, then power on the registers…' },
-  { label: 'Support', course: 'Handling a return', line: 'Check the order in the portal, then confirm the item is unused…' },
-  { label: 'Compliance', course: 'Cash handling policy', line: 'Every drawer count needs two signatures before close…' },
-  { label: 'Process updates', course: 'New POS workflow', line: 'Skip the old discount screen — it moved under Payments…' },
+  { label: 'Onboarding', course: 'New hire IT setup', line: 'First you provision SSO, then walk them through the VPN…' },
+  { label: 'Support', course: 'Handling a billing dispute', line: 'Check the account in Stripe, then look at the invoice history…' },
+  { label: 'Compliance', course: 'Customer data handling', line: 'Every record needs to be tagged before it can be exported…' },
+  { label: 'Process updates', course: 'New CRM workflow', line: 'Skip the old lead form — it moved into HubSpot last week…' },
 ]
 
 const bars = [5, 10, 7, 13, 9, 14, 6, 11]

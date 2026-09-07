@@ -4,7 +4,7 @@ import { Check, X } from 'lucide-react'
 
 const OPTIONS = [
   { text: 'Offer a refund immediately, no questions asked', correct: false },
-  { text: 'Acknowledge the frustration, then check the order details', correct: true },
+  { text: 'Acknowledge the frustration, then check the billing history', correct: true },
 ]
 
 export function SimulationMockup() {
@@ -17,13 +17,13 @@ export function SimulationMockup() {
         <span className="size-2.5 rounded-full bg-black/10" />
         <span className="size-2.5 rounded-full bg-black/10" />
         <span className="ml-3 text-xs text-ink-dim" style={{ color: '#8888a0' }}>
-          Simulation — Handling a return
+          Simulation — Handling a billing dispute
         </span>
       </div>
 
       <div className="space-y-3 p-5">
         <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-wash px-4 py-3 text-[13px] text-ink" style={{ backgroundColor: '#eef1fd' }}>
-          “This is the third time I've had to call about this order. I want a refund, now.”
+          “This is the third time I've had to email about this charge. I want a refund, now.”
         </div>
         <div className="pl-2 text-[11px] font-medium uppercase tracking-wide text-ink-dim" style={{ color: '#8888a0' }}>
           How do you respond?

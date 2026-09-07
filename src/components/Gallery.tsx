@@ -2,33 +2,33 @@ import { Reveal } from './Reveal'
 
 const TILES = [
   {
-    src: '/images/retail-tablet.jpg',
-    label: 'Retail operations',
-    note: 'Inventory & floor procedures',
+    src: '/images/gallery-sales.jpg',
+    label: 'Sales & customer success',
+    note: 'Pitch decks & renewal calls',
     className: 'col-span-2 row-span-2',
   },
   {
-    src: '/images/warehouse-tablet.jpg',
-    label: 'Logistics',
-    note: 'Receiving & fulfillment',
+    src: '/images/gallery-it.jpg',
+    label: 'Software & IT',
+    note: 'Deploys & access requests',
     className: 'col-span-1 row-span-1',
   },
   {
-    src: '/images/support-headset.jpg',
-    label: 'Contact centers',
-    note: 'Scripts & escalations',
+    src: '/images/gallery-support.jpg',
+    label: 'Customer support',
+    note: 'Tickets & escalations',
     className: 'col-span-1 row-span-2',
   },
   {
-    src: '/images/healthcare-tablet.jpg',
-    label: 'Healthcare',
-    note: 'Intake & compliance',
+    src: '/images/gallery-finance.jpg',
+    label: 'Finance & ops',
+    note: 'Reporting & approvals',
     className: 'col-span-1 row-span-1',
   },
   {
-    src: '/images/restaurant-training.jpg',
-    label: 'Hospitality',
-    note: 'Service & prep checklists',
+    src: '/images/gallery-hr.jpg',
+    label: 'HR & people',
+    note: 'Onboarding & policy',
     className: 'col-span-2 row-span-1',
   },
 ]
@@ -42,7 +42,7 @@ export function Gallery() {
             Wherever your team works
           </h2>
           <p className="mt-3 text-ink-soft" style={{ color: '#4b4b5c' }}>
-            The same process, taught the way each team actually works.
+            The same process, taught the way each department actually works.
           </p>
         </Reveal>
 

@@ -3,7 +3,7 @@ import { Reveal } from './Reveal'
 import { TiltCard } from './TiltCard'
 
 const ITEMS = [
-  { icon: GaugeCircle, title: 'Auto-scored quizzes', body: 'Know who\'s ready for the floor.' },
+  { icon: GaugeCircle, title: 'Auto-scored quizzes', body: 'Know who\'s actually ready to go.' },
   { icon: Globe2, title: 'Any device, any language', body: 'Auto-translated for global teams.' },
   { icon: ShieldCheck, title: 'SSO & permissions', body: 'Bring your own identity provider.' },
   { icon: Lock, title: 'Encrypted end to end', body: 'Your process stays your process.' },

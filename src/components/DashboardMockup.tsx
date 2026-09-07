@@ -2,9 +2,9 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 const COURSES = [
-  { name: 'Return handling', pct: 92 },
-  { name: 'Cash handling policy', pct: 78 },
-  { name: 'New POS workflow', pct: 41 },
+  { name: 'Billing dispute process', pct: 92 },
+  { name: 'Customer data handling', pct: 78 },
+  { name: 'New CRM workflow', pct: 41 },
 ]
 
 export function DashboardMockup() {

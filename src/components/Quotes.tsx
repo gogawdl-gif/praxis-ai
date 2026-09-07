@@ -2,20 +2,20 @@ import { Reveal } from './Reveal'
 
 const FEATURED = {
   quote:
-    'I recorded our closing checklist once, on my phone, in about ten minutes. By the next morning every new hire had a real course out of it — lessons, a quiz, all of it.',
-  role: 'Operations manager, retail',
+    'I screen-recorded our new-hire IT setup once, about ten minutes, talking through it as I went. By the next morning every new hire had a real course out of it — lessons, a quiz, all of it.',
+  role: 'IT operations manager',
   avatar: '/images/avatar-1.jpg',
 }
 
 const OTHERS = [
   {
-    quote: 'The simulations are the part that stuck — people practice the hard conversation first.',
-    role: 'Training lead, contact center',
+    quote: 'The simulations are the part that stuck — reps practice the hard renewal call before they have it for real.',
+    role: 'Enablement lead, customer success',
     avatar: '/images/avatar-2.jpg',
   },
   {
     quote: 'I told Praxis what changed in two sentences. Every lesson updated itself.',
-    role: 'Clinic operations director',
+    role: 'RevOps manager',
     avatar: '/images/avatar-3.jpg',
   },
 ]
