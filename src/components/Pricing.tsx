@@ -29,7 +29,7 @@ function Cell({ value }: { value: string | boolean }) {
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-24">
+    <section id="pricing" className="wash-section py-24">
       <div className="mx-auto max-w-5xl px-6">
         <Reveal className="mx-auto max-w-lg text-center">
           <h2 className="font-display text-3xl font-medium tracking-tight md:text-4xl">
@@ -41,7 +41,10 @@ export function Pricing() {
         </Reveal>
 
         <Reveal delay={0.1} className="mt-12 overflow-x-auto">
-          <div className="mx-auto min-w-[440px] max-w-xl overflow-hidden rounded-2xl border border-line" style={{ borderColor: '#e6e8f2' }}>
+          <div
+            className="card-soft mx-auto min-w-[440px] max-w-xl overflow-hidden rounded-2xl border border-line"
+            style={{ borderColor: '#e6e8f2' }}
+          >
             <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-white">
               <div className="border-b p-6" style={{ borderColor: '#e6e8f2' }} />
               {PLANS.map((plan) => (
