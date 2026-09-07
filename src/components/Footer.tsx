@@ -35,7 +35,7 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-4 max-w-xs text-sm text-ink-dim" style={{ color: '#8888a0' }}>
-              Show Mobbilise a process once. It builds the course and keeps it current for you.
+              Show Grasp a process once. It builds the course and keeps it current for you.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col-reverse items-center gap-4 border-t border-line pt-6 text-xs text-ink-dim sm:flex-row sm:justify-between" style={{ borderColor: '#e6e8f2', color: '#8888a0' }}>
-          <span>© {new Date().getFullYear()} Mobbilise. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Grasp. All rights reserved.</span>
           <span className="flex gap-4">
             <a href="/privacy.html" className="hover:text-ink">Privacy</a>
             <a href="/terms.html" className="hover:text-ink">Terms</a>

@@ -21,7 +21,7 @@ function ShowItOncePhoto() {
 const STEPS = [
   {
     title: 'Show it once',
-    body: "Talk through the process the way you'd explain it to a new hire, on screen or on camera. Mobbilise asks the follow-up questions a recording alone would miss.",
+    body: "Talk through the process the way you'd explain it to a new hire, on screen or on camera. Grasp asks the follow-up questions a recording alone would miss.",
     Visual: ShowItOncePhoto,
   },
   {

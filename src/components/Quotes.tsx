@@ -14,7 +14,7 @@ const OTHERS = [
     avatar: '/images/avatar-2.jpg',
   },
   {
-    quote: 'I told Mobbilise what changed in two sentences. Every lesson updated itself.',
+    quote: 'I told Grasp what changed in two sentences. Every lesson updated itself.',
     role: 'RevOps manager',
     avatar: '/images/avatar-3.jpg',
   },

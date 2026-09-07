@@ -36,7 +36,7 @@ export function Hero() {
           ))}
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg text-ink-soft" style={{ color: '#4b4b5c' }}>
-          Show it a process once. Mobbilise writes the lessons, the practice, and the quizzes, and
+          Show it a process once. Grasp writes the lessons, the practice, and the quizzes, and
           keeps every course current when the process changes.
         </p>
 
