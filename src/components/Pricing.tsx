@@ -30,14 +30,18 @@ function Cell({ value }: { value: string | boolean }) {
 function PlanHeader({ plan }: { plan: (typeof PLANS)[number] }) {
   return (
     <>
-      {plan.highlight && (
-        <span
-          className="mb-2 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-medium text-white"
-          style={{ backgroundColor: '#3d4bf5' }}
-        >
-          Most popular
-        </span>
-      )}
+      {/* Fixed-height slot so every plan's name starts on the same
+          baseline, whether or not it has a "Most popular" badge. */}
+      <div className="mb-2 flex h-[22px] items-start justify-center">
+        {plan.highlight && (
+          <span
+            className="inline-block rounded-full px-2.5 py-0.5 text-[10px] font-medium text-white"
+            style={{ backgroundColor: '#3d4bf5' }}
+          >
+            Most popular
+          </span>
+        )}
+      </div>
       <h3 className="font-display text-base font-medium">{plan.name}</h3>
       <div className="mt-2 flex items-baseline justify-center gap-1">
         <span className="font-display text-2xl font-medium tracking-tight">{plan.price}</span>
@@ -107,6 +111,7 @@ export function Pricing() {
           <div className="card-soft mx-auto max-w-xl overflow-hidden rounded-2xl border border-line" style={{ borderColor: '#e6e8f2' }}>
             <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-white">
               <div className="border-b p-6" style={{ borderColor: '#e6e8f2' }}>
+                <div className="mb-2 h-[22px]" />
                 <div className="font-display text-lg font-medium tracking-tight text-ink">Compare plans</div>
                 <p className="mt-1.5 text-sm" style={{ color: '#8888a0' }}>
                   Everything included, side by side.

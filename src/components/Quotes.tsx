@@ -13,7 +13,7 @@ const QUOTES = [
     avatar: '/images/avatar-2.jpg',
   },
   {
-    quote: 'Told it what changed in two sentences. Every lesson updated itself.',
+    quote: 'I told Learnik what changed in two sentences, and every lesson updated itself.',
     role: 'Operations manager',
     avatar: '/images/avatar-3.jpg',
   },

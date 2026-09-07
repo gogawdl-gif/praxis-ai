@@ -1,27 +1,10 @@
-import { Globe2, Lock, ShieldCheck, Users } from 'lucide-react'
 import { Reveal } from './Reveal'
 
 const ITEMS = [
-  {
-    icon: ShieldCheck,
-    title: 'Single sign-on (SSO)',
-    body: 'Works with the identity provider your IT team already runs.',
-  },
-  {
-    icon: Users,
-    title: 'Role-based permissions',
-    body: 'Control exactly who can create, edit, or just take training.',
-  },
-  {
-    icon: Lock,
-    title: 'Your data stays yours',
-    body: "Never used to train anyone else's model, never leaves your workspace.",
-  },
-  {
-    icon: Globe2,
-    title: '50+ languages',
-    body: 'One recording covers every office worldwide, automatically translated.',
-  },
+  { title: 'Single sign-on (SSO)', body: 'Your existing identity provider.' },
+  { title: 'Role-based permissions', body: 'Control who can create or edit.' },
+  { title: 'Your data stays yours', body: 'Never shared, never used to train other models.' },
+  { title: '50+ languages', body: 'Every office, automatically translated.' },
 ]
 
 export function FeatureGrid() {
@@ -35,21 +18,14 @@ export function FeatureGrid() {
           <h2 className="mt-3 font-display text-3xl font-medium tracking-tight md:text-4xl">
             Built to pass your IT review
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed" style={{ color: '#4b4b5c' }}>
-            The same controls your security team already expects from everything else on the
-            network.
-          </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid divide-y divide-line rounded-2xl border border-line bg-white sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4" style={{ borderColor: '#e6e8f2' }}>
           {ITEMS.map((item, i) => (
-            <Reveal key={item.title} delay={i * 0.06} className="h-full">
-              <div className="h-full rounded-2xl border border-line bg-white p-6 shadow-[0_1px_2px_rgba(20,20,31,0.04)]" style={{ borderColor: '#e6e8f2' }}>
-                <span className="grid size-11 place-items-center rounded-xl" style={{ backgroundColor: '#eef1fd', color: '#3d4bf5' }}>
-                  <item.icon size={19} />
-                </span>
-                <h4 className="mt-4 font-display text-base font-medium">{item.title}</h4>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: '#4b4b5c' }}>
+            <Reveal key={item.title} delay={i * 0.05} className="h-full">
+              <div className="h-full p-7">
+                <h4 className="font-display text-base font-medium">{item.title}</h4>
+                <p className="mt-1.5 text-sm leading-relaxed" style={{ color: '#4b4b5c' }}>
                   {item.body}
                 </p>
               </div>
