@@ -1,46 +1,36 @@
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { Reveal } from './Reveal'
 
 const ITEMS = [
-  { lead: 'A manager explains it once.', body: 'Then has to explain it again to every new employee.', percent: 40 },
-  { lead: 'The SOP exists.', body: 'But nobody wants to read a 40-page document.', percent: 55 },
-  { lead: 'The presentation exists.', body: "But it isn't a real learning programme.", percent: 30 },
-  { lead: 'The expert leaves.', body: 'And years of practical knowledge leave with them.', percent: 60 },
+  { lead: 'A manager explains it once.', body: 'Then has to explain it again to every new employee.' },
+  { lead: 'The SOP exists.', body: 'But nobody wants to read a 40-page document.' },
+  { lead: 'The presentation exists.', body: "But it isn't a real learning programme." },
+  { lead: 'The expert leaves.', body: 'And years of practical knowledge leave with them.' },
 ]
 
-// A ring that never quite closes - the visual stand-in for "the
-// knowledge is there, but it never became something your team can
-// actually go through." No number is shown; it's a symbol, not a
-// stat. The closing line below pays it off with a ring that completes.
-function ProgressRing({ percent, delay = 0 }: { percent: number; delay?: number }) {
-  const size = 40
-  const stroke = 3.25
-  const radius = (size - stroke) / 2
-  const circumference = 2 * Math.PI * radius
-  const dashOffset = circumference * (1 - percent / 100)
+const CYCLE_MS = 3400
 
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
-      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#e6e8f2" strokeWidth={stroke} />
-      <motion.circle
-        cx={size / 2}
-        cy={size / 2}
-        r={radius}
-        fill="none"
-        stroke="#3d4bf5"
-        strokeWidth={stroke}
-        strokeLinecap="round"
-        strokeDasharray={circumference}
-        initial={{ strokeDashoffset: circumference }}
-        whileInView={{ strokeDashoffset: dashOffset }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 1.1, delay: delay + 0.2, ease: [0.16, 1, 0.3, 1] }}
-      />
-    </svg>
-  )
-}
+// Each card's look depends only on its distance from the active one -
+// the fanned-out stack reads as "everything this knowledge already
+// lives in: someone's head, a doc, a deck" - scattered, not yet one
+// thing. That's the point being made, not just a decoration.
+const ROTATE = [0, 7, -6, 9]
+const X = [0, 22, -16, 10]
+const Y = [0, 14, 24, 32]
+const SCALE = [1, 0.95, 0.91, 0.88]
+const OPACITY = [1, 0.65, 0.4, 0.22]
 
 export function ProblemSection() {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+
+  useEffect(() => {
+    if (paused) return
+    const id = setInterval(() => setActive((a) => (a + 1) % ITEMS.length), CYCLE_MS)
+    return () => clearInterval(id)
+  }, [paused])
+
   return (
     <section className="py-24">
       <div className="mx-auto max-w-6xl px-6">
@@ -53,26 +43,53 @@ export function ProblemSection() {
           </p>
         </Reveal>
 
-        <div
-          className="mt-12 grid divide-y divide-line rounded-2xl border border-line bg-white sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4"
-          style={{ borderColor: '#e6e8f2' }}
-        >
-          {ITEMS.map((item, i) => (
-            <Reveal key={item.lead} delay={i * 0.05} className="h-full">
-              <div className="h-full p-7">
-                <ProgressRing percent={item.percent} delay={i * 0.05} />
-                <h4 className="mt-4 font-display text-base font-medium">{item.lead}</h4>
-                <p className="mt-1.5 text-sm leading-relaxed" style={{ color: '#4b4b5c' }}>
-                  {item.body}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal delay={0.1}>
+          <div
+            className="relative mx-auto mt-16 h-[220px] w-full max-w-md sm:h-[190px]"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            {ITEMS.map((item, i) => {
+              const d = (i - active + ITEMS.length) % ITEMS.length
+              return (
+                <motion.div
+                  key={item.lead}
+                  className="absolute inset-0 rounded-2xl border bg-white p-7"
+                  style={{
+                    borderColor: '#e6e8f2',
+                    zIndex: ITEMS.length - d,
+                    boxShadow: d === 0 ? '0 24px 48px -20px rgba(20,20,31,0.22)' : '0 12px 24px -16px rgba(20,20,31,0.16)',
+                  }}
+                  animate={{ rotate: ROTATE[d], x: X[d], y: Y[d], scale: SCALE[d], opacity: OPACITY[d] }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <h4 className="font-display text-lg font-medium">{item.lead}</h4>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: '#4b4b5c' }}>
+                    {item.body}
+                  </p>
+                </motion.div>
+              )
+            })}
+          </div>
 
-        <Reveal delay={0.15} className="mt-10 flex items-center justify-center gap-3">
-          <ProgressRing percent={100} delay={0.15} />
-          <p className="text-base font-medium text-ink">
+          <div className="mt-7 flex items-center justify-center gap-2">
+            {ITEMS.map((item, i) => (
+              <button
+                key={item.lead}
+                aria-label={`Show: ${item.lead}`}
+                onClick={() => setActive(i)}
+                className="h-1.5 rounded-full transition-all"
+                style={{
+                  width: i === active ? 20 : 6,
+                  backgroundColor: i === active ? '#3d4bf5' : '#e6e8f2',
+                }}
+              />
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.2}>
+          <p className="mt-10 text-center text-base font-medium text-ink">
             Learnik turns that knowledge into training your team can use.
           </p>
         </Reveal>
