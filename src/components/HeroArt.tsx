@@ -112,19 +112,15 @@ function FunnelChip({ input, containerWidth }: { input: SourceInput; containerWi
   )
 }
 
+// No pulsing ring here - a thin border visually thins further as it
+// scales up via transform, which read as flickery rather than a clean
+// pulse, and two staggered rings overlapping made it busier than
+// intentional. The chips flowing in and the output card cycling
+// already carry the motion in this scene; the center point doesn't
+// need its own animation to read as "live."
 function FunnelCenter() {
   return (
     <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: pct(CENTER.left), top: pct(CENTER.top) }}>
-      {[0, 1].map((i) => (
-        <motion.span
-          key={i}
-          className="absolute inset-0 rounded-full"
-          style={{ border: '1.5px solid #3d4bf5' }}
-          initial={{ scale: 1, opacity: 0.45 }}
-          animate={{ scale: 2.4, opacity: 0 }}
-          transition={{ duration: 2.6, delay: i * 1.3, repeat: Infinity, ease: 'easeOut' }}
-        />
-      ))}
       <div
         className="grid size-11 place-items-center rounded-full shadow-[0_14px_28px_-10px_rgba(61,75,245,0.55)]"
         style={{ backgroundColor: '#3d4bf5' }}
