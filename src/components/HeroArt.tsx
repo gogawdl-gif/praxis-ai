@@ -10,7 +10,6 @@ type SourceInput = {
   label: string
   Icon: ComponentType<{ size?: number; className?: string }>
   start: { left: number; top: number }
-  mid: { left: number; top: number }
   duration: number
   delay: number
 }
@@ -19,10 +18,10 @@ type SourceInput = {
 // types (kept generic on purpose: the point is "whatever you already
 // have", not a specific file format).
 const INPUTS: SourceInput[] = [
-  { label: 'PDF', Icon: FileText, start: { left: 6, top: 6 }, mid: { left: 25, top: 24 }, duration: 3.6, delay: 0 },
-  { label: 'Video', Icon: Video, start: { left: 86, top: 4 }, mid: { left: 65, top: 22 }, duration: 3.9, delay: 0.9 },
-  { label: 'Screen recording', Icon: ScreenShare, start: { left: 2, top: 64 }, mid: { left: 22, top: 52 }, duration: 3.4, delay: 1.8 },
-  { label: 'Presentation', Icon: Presentation, start: { left: 92, top: 68 }, mid: { left: 70, top: 54 }, duration: 4.1, delay: 2.7 },
+  { label: 'PDF', Icon: FileText, start: { left: 6, top: 6 }, duration: 3.6, delay: 0 },
+  { label: 'Video', Icon: Video, start: { left: 86, top: 4 }, duration: 3.9, delay: 0.9 },
+  { label: 'Screen recording', Icon: ScreenShare, start: { left: 2, top: 64 }, duration: 3.4, delay: 1.8 },
+  { label: 'Presentation', Icon: Presentation, start: { left: 92, top: 68 }, duration: 4.1, delay: 2.7 },
 ]
 
 // What comes out the other end — one complete learning programme,
@@ -43,18 +42,22 @@ function pct(n: number) {
 
 // Moves via transform (x/y), not left/top — left/top are layout
 // properties, so animating them every frame forces the browser to
-// recompute layout on each tick instead of just compositing, which is
-// what was causing the visible stutter/glitch. The chip's static start
-// position is set once via left/top (cheap, happens only on mount);
-// everything past that point is a pure GPU-composited transform.
+// recompute layout on each tick instead of just compositing.
+//
+// Position is a single two-point path (start straight to center) with
+// one continuous ease, not three waypoints — a middle waypoint means
+// two separately-eased segments back to back, and velocity resets to
+// "slow" again at the join, which reads as a stutter/stop-start rather
+// than a smooth glide. Opacity and scale keep their own multi-point
+// fade so the chip still appears, holds, then fades as it "arrives" -
+// a property fading unevenly isn't noticeable the way a position
+// stutter is, so it doesn't need the same one-segment treatment.
 function FunnelChip({ input, containerWidth }: { input: SourceInput; containerWidth: number }) {
-  const { Icon, label, start, mid } = input
-  const toPx = (p: { left: number; top: number }) => ({
-    x: ((p.left - start.left) / 100) * containerWidth,
-    y: ((p.top - start.top) / 100) * CONTAINER_HEIGHT,
-  })
-  const midPx = toPx(mid)
-  const centerPx = toPx(CENTER)
+  const { Icon, label, start } = input
+  const centerPx = {
+    x: ((CENTER.left - start.left) / 100) * containerWidth,
+    y: ((CENTER.top - start.top) / 100) * CONTAINER_HEIGHT,
+  }
 
   return (
     <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: pct(start.left), top: pct(start.top) }}>
@@ -63,17 +66,18 @@ function FunnelChip({ input, containerWidth }: { input: SourceInput; containerWi
         style={{ borderColor: '#e6e8f2', color: '#4b4b5c' }}
         initial={{ x: 0, y: 0, opacity: 0, scale: 0.85 }}
         animate={{
-          x: [0, midPx.x, centerPx.x],
-          y: [0, midPx.y, centerPx.y],
+          x: [0, centerPx.x],
+          y: [0, centerPx.y],
           opacity: [0, 1, 1, 0],
-          scale: [0.85, 1, 0.95, 0.5],
+          scale: [0.85, 1, 0.5],
         }}
         transition={{
           duration: input.duration,
           delay: input.delay,
           repeat: Infinity,
-          ease: 'easeIn',
-          times: [0, 0.4, 0.82, 1],
+          ease: 'easeInOut',
+          opacity: { times: [0, 0.3, 0.75, 1] },
+          scale: { times: [0, 0.3, 1] },
         }}
       >
         <Icon size={13} className="shrink-0" />
@@ -168,11 +172,13 @@ export function HeroArt() {
 
   return (
     <div ref={containerRef} className="relative mx-auto h-[420px] w-full max-w-md">
-      <motion.div
+      {/* Static, not animated - a scale-pulsing blur filter is one of
+          the more expensive things to repaint every frame, and stacked
+          on top of four continuously-moving chips it was adding real
+          compositing cost for a barely-visible effect. */}
+      <div
         className="absolute left-1/2 top-[45%] size-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
         style={{ backgroundColor: 'rgba(61,75,245,0.08)' }}
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* funnel stem connecting the convergence point to the finished course */}
