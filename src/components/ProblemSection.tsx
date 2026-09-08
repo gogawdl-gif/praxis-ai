@@ -1,10 +1,13 @@
 import { Reveal } from './Reveal'
 
+// One-word label per problem, not a number - these are four separate,
+// unrelated problems, not steps in a sequence, so anything that reads
+// as ordering (01/02/03/04) is the wrong device even if it looks bold.
 const ITEMS = [
-  { n: '01', lead: 'A manager explains it once.', body: 'Then has to explain it again to every new employee.' },
-  { n: '02', lead: 'The SOP exists.', body: 'But nobody wants to read a 40-page document.' },
-  { n: '03', lead: 'The presentation exists.', body: "But it isn't a real learning programme." },
-  { n: '04', lead: 'The expert leaves.', body: 'And years of practical knowledge leave with them.' },
+  { tag: 'Again', lead: 'A manager explains it once.', body: 'Then has to explain it again to every new employee.' },
+  { tag: 'Unread', lead: 'The SOP exists.', body: 'But nobody wants to read a 40-page document.' },
+  { tag: 'Incomplete', lead: 'The presentation exists.', body: "But it isn't a real learning programme." },
+  { tag: 'Gone', lead: 'The expert leaves.', body: 'And years of practical knowledge leave with them.' },
 ]
 
 export function ProblemSection() {
@@ -25,12 +28,12 @@ export function ProblemSection() {
             <Reveal key={item.lead} delay={i * 0.08}>
               <div className="relative">
                 <span
-                  className="font-display block text-7xl font-medium leading-none tracking-tight"
-                  style={{ color: '#3d4bf5', opacity: 0.14 }}
+                  className="font-display block text-4xl font-medium leading-none tracking-tight sm:text-5xl"
+                  style={{ color: '#3d4bf5', opacity: 0.16 }}
                 >
-                  {item.n}
+                  {item.tag}
                 </span>
-                <h4 className="-mt-5 font-display text-lg font-medium">{item.lead}</h4>
+                <h4 className="mt-4 font-display text-lg font-medium">{item.lead}</h4>
                 <p className="mt-2 text-sm leading-relaxed" style={{ color: '#4b4b5c' }}>
                   {item.body}
                 </p>
