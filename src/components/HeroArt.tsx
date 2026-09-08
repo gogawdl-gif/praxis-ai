@@ -72,12 +72,37 @@ function FunnelChip({ input, containerWidth }: { input: SourceInput; containerWi
           scale: [0.85, 1, 0.5],
         }}
         transition={{
-          duration: input.duration,
-          delay: input.delay,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          opacity: { times: [0, 0.3, 0.75, 1] },
-          scale: { times: [0, 0.3, 1] },
+          x: { duration: input.duration, delay: input.delay, repeat: Infinity, ease: 'easeInOut' },
+          y: { duration: input.duration, delay: input.delay, repeat: Infinity, ease: 'easeInOut' },
+          // Framer's per-property transition overrides replace the
+          // whole transition for that property rather than inheriting
+          // duration/repeat/delay from sibling keys - leaving those out
+          // here silently fell back to a one-shot ~0.3s animation with
+          // no repeat, so opacity/scale played once and froze at their
+          // final (invisible, shrunk) value forever while x/y kept
+          // looping normally. Every property needs its own complete
+          // config, not just the parts that differ (the times array).
+          //
+          // Each chip runs on its own duration, so with repeat: Infinity
+          // their cycles drift in and out of phase with each other over
+          // time - if "visible" were only a small slice of each cycle,
+          // there'd be real stretches where all four chips are
+          // invisible at once and the funnel looks empty. Visible for
+          // ~80% of each chip's own cycle, so that can't happen.
+          opacity: {
+            duration: input.duration,
+            delay: input.delay,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            times: [0, 0.08, 0.88, 1],
+          },
+          scale: {
+            duration: input.duration,
+            delay: input.delay,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            times: [0, 0.08, 1],
+          },
         }}
       >
         <Icon size={13} className="shrink-0" />
