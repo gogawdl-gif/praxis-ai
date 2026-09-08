@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { HeroArt } from './HeroArt'
 
-const HEADLINE = 'Turn what your best people know into training everyone can pass.'
+const HEADLINE = 'Turn your company knowledge into training.'
 
 export function Hero() {
   return (
@@ -30,8 +30,9 @@ export function Hero() {
             ))}
           </h1>
           <p className="mx-auto mt-5 max-w-lg text-lg text-ink-soft md:mx-0" style={{ color: '#4b4b5c' }}>
-            Show it a process once. Learnik writes the lessons, the practice, and the quizzes, and
-            keeps every course current when the process changes.
+            Upload your documents, videos, presentations, or simply explain a process. Learnik
+            turns them into structured lessons, exercises, and quizzes your team can actually
+            complete.
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row md:justify-start">
@@ -40,7 +41,7 @@ export function Hero() {
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-white shadow-[0_12px_24px_-8px_rgba(61,75,245,0.5)] transition-transform hover:scale-[1.02]"
               style={{ backgroundColor: '#3d4bf5' }}
             >
-              Start training your team
+              Start free
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </a>
             <a
@@ -53,7 +54,7 @@ export function Hero() {
           </div>
 
           <p className="mt-6 text-xs text-ink-dim md:text-left" style={{ color: '#8888a0' }}>
-            7-day free trial. No credit card, no setup call.
+            7-day free trial · No credit card · No setup call
           </p>
         </div>
 

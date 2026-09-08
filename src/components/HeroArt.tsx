@@ -1,8 +1,7 @@
 import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
-import { Check, FileText, ScreenShare } from 'lucide-react'
+import { Check, FileText, Presentation, ScreenShare, Video } from 'lucide-react'
 import type { ComponentType } from 'react'
 import { useEffect, useState } from 'react'
-import { IconDropFile, IconMic } from './icons'
 
 const CENTER = { left: 50, top: 45 }
 
@@ -15,23 +14,24 @@ type SourceInput = {
   delay: number
 }
 
-// What actually feeds the funnel — same three input types as the
-// "How it works" Input step, with docs split into two chips so the
-// funnel reads as "several messy sources", not one.
+// What actually feeds the funnel — plain, immediately-legible source
+// types (kept generic on purpose: the point is "whatever you already
+// have", not a specific file format).
 const INPUTS: SourceInput[] = [
-  { label: 'Screen recording', Icon: ScreenShare, start: { left: 6, top: 6 }, mid: { left: 25, top: 24 }, duration: 3.6, delay: 0 },
-  { label: 'Process.pdf', Icon: FileText, start: { left: 86, top: 4 }, mid: { left: 65, top: 22 }, duration: 3.9, delay: 0.9 },
-  { label: 'Voice walkthrough', Icon: IconMic, start: { left: 2, top: 64 }, mid: { left: 22, top: 52 }, duration: 3.4, delay: 1.8 },
-  { label: 'Old slide deck', Icon: IconDropFile, start: { left: 92, top: 68 }, mid: { left: 70, top: 54 }, duration: 4.1, delay: 2.7 },
+  { label: 'PDF', Icon: FileText, start: { left: 6, top: 6 }, mid: { left: 25, top: 24 }, duration: 3.6, delay: 0 },
+  { label: 'Video', Icon: Video, start: { left: 86, top: 4 }, mid: { left: 65, top: 22 }, duration: 3.9, delay: 0.9 },
+  { label: 'Screen recording', Icon: ScreenShare, start: { left: 2, top: 64 }, mid: { left: 22, top: 52 }, duration: 3.4, delay: 1.8 },
+  { label: 'Presentation', Icon: Presentation, start: { left: 92, top: 68 }, mid: { left: 70, top: 54 }, duration: 4.1, delay: 2.7 },
 ]
 
-// What comes out the other end — one clean, structured course, cycling
-// through the same example content used later in "How it works" so the
-// hero isn't teasing outputs the rest of the page doesn't back up.
+// What comes out the other end — one complete learning programme,
+// cycling through the same example content used later in "How it
+// works" so the hero isn't teasing outputs the rest of the page
+// doesn't back up.
 const OUTPUTS = [
-  { title: 'New hire onboarding', meta: '6 lessons · quiz · ready' },
-  { title: 'Refund policy training', meta: '4 lessons · quiz · ready' },
-  { title: 'CRM workflow course', meta: '5 lessons · quiz · ready' },
+  { title: 'New hire onboarding', meta: '6 lessons · Practice · Quiz' },
+  { title: 'Refund policy training', meta: '4 lessons · Practice · Quiz' },
+  { title: 'CRM workflow course', meta: '5 lessons · Practice · Quiz' },
 ]
 
 const CYCLE_MS = 3200

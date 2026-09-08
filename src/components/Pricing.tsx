@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import { Reveal } from './Reveal'
 
 const PLANS = [
-  { name: 'Business', price: '$14', period: '/employee/mo', note: '', cta: 'Start free trial', highlight: true },
+  { name: 'Business', price: '$14', period: '/employee/mo', note: '', cta: 'Start free', highlight: true },
   { name: 'Enterprise', price: 'Custom', period: '', note: 'For teams of 100+', cta: 'Talk to sales', highlight: false },
 ]
 

@@ -2,7 +2,7 @@ import { CountUp } from './CountUp'
 import { Reveal } from './Reveal'
 
 const STATS = [
-  { node: <CountUp value={3} suffix="x" />, label: 'faster than building slides by hand' },
+  { node: 'Minutes', label: 'from upload to a ready course' },
   { node: 'Zero', label: 'instructional designers needed' },
   { node: <CountUp value={1} />, label: 'sentence to update a lesson' },
   { node: '24/7', label: 'available, in 50+ languages' },

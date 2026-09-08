@@ -47,7 +47,7 @@ export function Nav() {
             className="rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-white transition-transform hover:scale-[1.03]"
             style={{ backgroundColor: '#3d4bf5' }}
           >
-            Start free trial
+            Start free
           </a>
         </div>
 
@@ -90,7 +90,7 @@ export function Nav() {
               className="mt-2 rounded-full bg-primary px-4 py-2.5 text-center text-sm font-medium text-white"
               style={{ backgroundColor: '#3d4bf5' }}
             >
-              Start free trial
+              Start free
             </a>
           </div>
         </div>

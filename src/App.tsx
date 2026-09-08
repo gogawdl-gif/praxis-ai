@@ -7,6 +7,7 @@ import { HowItWorks } from './components/HowItWorks'
 import { IndustryMarquee } from './components/IndustryMarquee'
 import { Nav } from './components/Nav'
 import { Pricing } from './components/Pricing'
+import { ProblemSection } from './components/ProblemSection'
 import { Quotes } from './components/Quotes'
 import { Stats } from './components/Stats'
 
@@ -19,6 +20,7 @@ function App() {
         <IndustryMarquee />
         <Stats />
         <Gallery />
+        <ProblemSection />
         <HowItWorks />
         <FeatureGrid />
         <Quotes />
