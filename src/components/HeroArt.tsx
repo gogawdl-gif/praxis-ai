@@ -1,8 +1,9 @@
-import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Check, FileText, Presentation, ScreenShare, Video } from 'lucide-react'
 import type { ComponentType } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
+const CONTAINER_HEIGHT = 420
 const CENTER = { left: 50, top: 45 }
 
 type SourceInput = {
@@ -40,30 +41,45 @@ function pct(n: number) {
   return `${n}%`
 }
 
-function FunnelChip({ input }: { input: SourceInput }) {
+// Moves via transform (x/y), not left/top — left/top are layout
+// properties, so animating them every frame forces the browser to
+// recompute layout on each tick instead of just compositing, which is
+// what was causing the visible stutter/glitch. The chip's static start
+// position is set once via left/top (cheap, happens only on mount);
+// everything past that point is a pure GPU-composited transform.
+function FunnelChip({ input, containerWidth }: { input: SourceInput; containerWidth: number }) {
   const { Icon, label, start, mid } = input
+  const toPx = (p: { left: number; top: number }) => ({
+    x: ((p.left - start.left) / 100) * containerWidth,
+    y: ((p.top - start.top) / 100) * CONTAINER_HEIGHT,
+  })
+  const midPx = toPx(mid)
+  const centerPx = toPx(CENTER)
+
   return (
-    <motion.div
-      className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border bg-white px-3 py-1.5 text-xs shadow-[0_10px_20px_-10px_rgba(20,20,31,0.25)]"
-      style={{ borderColor: '#e6e8f2', color: '#4b4b5c' }}
-      initial={{ left: pct(start.left), top: pct(start.top), opacity: 0, scale: 0.85 }}
-      animate={{
-        left: [pct(start.left), pct(mid.left), pct(CENTER.left)],
-        top: [pct(start.top), pct(mid.top), pct(CENTER.top)],
-        opacity: [0, 1, 1, 0],
-        scale: [0.85, 1, 0.95, 0.5],
-      }}
-      transition={{
-        duration: input.duration,
-        delay: input.delay,
-        repeat: Infinity,
-        ease: 'easeIn',
-        times: [0, 0.4, 0.82, 1],
-      }}
-    >
-      <Icon size={13} className="shrink-0" />
-      {label}
-    </motion.div>
+    <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: pct(start.left), top: pct(start.top) }}>
+      <motion.div
+        className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-white px-3 py-1.5 text-xs shadow-[0_10px_20px_-10px_rgba(20,20,31,0.25)]"
+        style={{ borderColor: '#e6e8f2', color: '#4b4b5c' }}
+        initial={{ x: 0, y: 0, opacity: 0, scale: 0.85 }}
+        animate={{
+          x: [0, midPx.x, centerPx.x],
+          y: [0, midPx.y, centerPx.y],
+          opacity: [0, 1, 1, 0],
+          scale: [0.85, 1, 0.95, 0.5],
+        }}
+        transition={{
+          duration: input.duration,
+          delay: input.delay,
+          repeat: Infinity,
+          ease: 'easeIn',
+          times: [0, 0.4, 0.82, 1],
+        }}
+      >
+        <Icon size={13} className="shrink-0" />
+        {label}
+      </motion.div>
+    </div>
   )
 }
 
@@ -129,31 +145,29 @@ function FunnelOutput() {
 }
 
 export function HeroArt() {
-  const rotX = useMotionValue(0)
-  const rotY = useMotionValue(0)
-  const springRotX = useSpring(rotX, { stiffness: 100, damping: 14 })
-  const springRotY = useSpring(rotY, { stiffness: 100, damping: 14 })
+  const containerRef = useRef<HTMLDivElement>(null)
+  // Height is a fixed 420px regardless of viewport; width is the only
+  // dimension that actually changes (w-full up to max-w-md), so that's
+  // the only thing worth measuring.
+  const [containerWidth, setContainerWidth] = useState(384)
 
-  function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const px = (e.clientX - rect.left) / rect.width - 0.5
-    const py = (e.clientY - rect.top) / rect.height - 0.5
-    rotY.set(px * 6)
-    rotX.set(py * -6)
-  }
-
-  function onMouseLeave() {
-    rotX.set(0)
-    rotY.set(0)
-  }
+  // Measured synchronously before paint so the chips' first render
+  // already uses the real width - avoids a one-time visible snap from
+  // the 384px fallback to the actual size.
+  useLayoutEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    setContainerWidth(el.getBoundingClientRect().width)
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width
+      if (width) setContainerWidth(width)
+    })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <motion.div
-      className="relative mx-auto h-[420px] w-full max-w-md"
-      style={{ rotateX: springRotX, rotateY: springRotY, transformPerspective: 800 }}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-    >
+    <div ref={containerRef} className="relative mx-auto h-[420px] w-full max-w-md">
       <motion.div
         className="absolute left-1/2 top-[45%] size-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
         style={{ backgroundColor: 'rgba(61,75,245,0.08)' }}
@@ -173,11 +187,11 @@ export function HeroArt() {
       />
 
       {INPUTS.map((input) => (
-        <FunnelChip key={input.label} input={input} />
+        <FunnelChip key={input.label} input={input} containerWidth={containerWidth} />
       ))}
 
       <FunnelCenter />
       <FunnelOutput />
-    </motion.div>
+    </div>
   )
 }
